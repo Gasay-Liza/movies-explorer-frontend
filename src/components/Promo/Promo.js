@@ -4,18 +4,18 @@ import promoImage from "../../images/promo-img.svg";
 function Promo(props) {
   return (
     <section className="promo">
-      <div class="promo_container">
-        <h1 class="promo__title">
+      <div className="promo_container">
+        <h1 className="promo__title">
           Учебный проект студента факультета Веб-разработки.
         </h1>
-        <p class="promo__subtitle">
+        <p className="promo__subtitle">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <button type="button" class="promo_btn">
+        <button type="button" className="promo_btn">
           Узнать больше
         </button>
       </div>
-      <img class="promo_img" src={promoImage}></img>
+      <img className="promo_img" src={promoImage}></img>
     </section>
   );
 }
