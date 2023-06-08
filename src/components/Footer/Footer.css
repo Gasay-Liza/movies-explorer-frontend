@@ -1,0 +1,114 @@
+.footer {
+    max-width: 1280px;
+    background: #202020;
+    padding: 79px 70px 0;
+    box-sizing: border-box;
+ }
+
+.footer__copyright {
+    margin: 0 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    text-align: center;
+    color: #8B8B8B;
+    text-align: center;
+    padding: 0 0 20px;
+    border-bottom: 1px solid #424242;
+ }
+
+.footer__block { 
+    padding: 20px 0 20px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_year {
+    margin: 0 0;
+    padding: 0 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+ }
+
+.footer__socials { 
+    margin: 0 0;
+    padding: 0 0;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    list-style-type: none;
+}
+
+.footer__social { 
+    margin: 0 0;
+    padding: 0 0;
+}
+
+.footer__social-link{
+    display: flex;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 860px){
+    .footer {
+        padding: 79px 30px 0;
+     }
+
+}
+
+@media screen and (max-width: 420px){
+    .footer {
+        padding: 79px 10px 0;
+     }
+    
+    .footer__copyright {
+        font-size: 12px;
+        line-height: 15px;
+        padding: 0 0 21px;
+     }
+    
+    .footer__block { 
+        padding: 30px 0 20px 0;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+    }
+    
+    .footer_year {
+        font-size: 12px;
+        line-height: 15px;
+        color: #8B8B8B;
+     }
+    
+    .footer__socials { 
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        order: -1;
+    }
+
+    .footer__social { 
+        padding: 0 0;
+    }
+    
+    
+    .footer__social-link{
+        font-size: 12px;
+        line-height: 15px;
+    }
+    
+}
