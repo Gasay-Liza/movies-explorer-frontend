@@ -1,0 +1,50 @@
+.search-form{
+    width: 100%;
+    max-width: 1280px;
+    box-sizing: border-box;
+    padding: 80px 70px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #424242;
+}
+
+.search-form__container{
+    width: 100%;
+    padding: 0 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-form__bar{
+    width: 100%;
+    padding: 0 0;
+    background: #2F2F2F;
+    border-radius: 8px;
+    border: none;
+    min-height: 50px;
+    padding: 16px 20px;
+    /* Текст внутри формы поиска */
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #8B8B8B;
+}
+
+.search-form__btn{
+    padding: 0 0;
+    width: 44px;
+    height: 44px;
+    background: #4285F4;
+    background-image: url(../../images/search-icon.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    border: none;
+    border-radius: 8px;
+}
