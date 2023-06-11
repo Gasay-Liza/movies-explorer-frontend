@@ -1,6 +1,6 @@
 .footer {
-    max-width: 1280px;
-    background: #202020;
+    width: 100%;
+    background: inherit;
     padding: 79px 70px 0;
     box-sizing: border-box;
  }

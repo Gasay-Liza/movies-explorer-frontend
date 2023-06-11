@@ -3,12 +3,21 @@ import React, { useState } from "react";
 import "./Movies.css";
 import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import testMoviesCards from "../../utils/utils";
+import Footer from "../Footer/Footer";
+
 
 function Movies(props) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [cards, setCards] = React.useState([]);
+
+
+
   return (
     <section className="movies">
-        <SearchForm/>
+      <SearchForm />
+      <MoviesCardList movies={testMoviesCards} />
+      {/* <Footer /> */}
     </section>
   );
 }

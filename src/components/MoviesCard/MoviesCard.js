@@ -1,25 +1,22 @@
 import "./MoviesCard.css";
 
-function MoviesCard({ movie, onCardLike}) {
-  const cardLikeButtonclassName = `photo-card__like ${
-    isLiked && "photo-card__like_active"
-  }`;
-
+function MoviesCard({
+  movie,
+}) {
   return (
     <li className="movie-card">
       <img
         className="movie-card__image"
-        src={movie.link}
-        alt={`Кадр из фильма ${name}`}
+        src={movie.image.url}
+        alt={`Кадр из фильма "${movie.nameRU}"`}
       />
       <div className="movie-card__description">
         <div className="movie-card__name-container">
-          <h3 className="movie-card__name">{movie.name}</h3>
+          <h3 className="movie-card__name">{movie.nameRU}</h3>
           <button
-            onClick={handleLikeClick}
             aria-label="Лайк"
             type="button"
-            className={cardLikeButtonclassName}
+            className="photo-card__like"
           />
         </div>
 
