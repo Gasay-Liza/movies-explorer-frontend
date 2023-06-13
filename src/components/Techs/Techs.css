@@ -1,6 +1,8 @@
 .techs{
     max-width: 1280px;
     min-width: 320px;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     padding: 100px 70px;
     background: #272727;

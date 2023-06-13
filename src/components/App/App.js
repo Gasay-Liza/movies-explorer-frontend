@@ -1,5 +1,7 @@
 import React from "react";
-// import Main from "../Main/Main";
+import { Route, Routes } from "react-router-dom";
+import Register from "../Register/Register";
+import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 // import MoviesCard from "../MoviesCard/MoviesCard";
 
@@ -11,7 +13,18 @@ function App() {
     <div className="page">
       <div className="page__content">
         {/* <Main/> */}
-        <Movies />
+
+        <Routes>
+          <Route path="/" element={<Register />} />
+        </Routes>
+
+        <Routes>
+          <Route path="/ffff" element={<Main />} />
+        </Routes>
+
+        <Routes>
+          <Route path="/movies" element={<Movies />} />
+        </Routes>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
     max-width: 1280px;
     box-sizing: border-box;
     padding: 75px 70px 85px 70px;
-    background-color: #073042;
+    background-color: hsl(198, 81%, 14%);
     display: flex;
     flex-direction: row;
     justify-content: space-between;

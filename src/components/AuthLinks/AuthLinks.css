@@ -1,0 +1,44 @@
+.auth-links { }
+
+.auth-links__list { 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0;
+    gap: 30px;
+    list-style-type: none;
+}
+
+.auth-links__list-item{
+    width: 100%;
+}
+
+.auth-links__link { 
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    color: #FFFFFF;
+    text-decoration: none;
+    }
+
+.auth-links__link_type_register { }
+
+.auth-links__link_type_login {
+    width: 76px;
+    min-height: 32px;
+    padding: 8px 5px;
+    background: #3DDC84;
+    border-radius: 3px;
+    /* Текст */
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    align-items: center;
+    color: #000000;
+ }

@@ -6,16 +6,12 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import testMoviesCards from "../../utils/utils";
 import Footer from "../Footer/Footer";
 
-
-function Movies(props) {
+function SavedMovies(props) {
   const [cards, setCards] = React.useState([]);
-
-
 
   return (
     <section className="movies">
-      <Header
-        isAuthorized = {true} />
+      <Header isAuthorized={true} />
       <SearchForm />
       <MoviesCardList movies={testMoviesCards} />
       <Footer />
@@ -23,4 +19,4 @@ function Movies(props) {
   );
 }
 
-export default Movies;
+export default SavedMovies;
