@@ -1,0 +1,59 @@
+.burger-btn{
+    display: none;
+}
+ 
+ @media screen and (max-width: 860px){
+   /* Кнопка для мобильного приложения */
+ .burger-btn{
+    /* Сброс */
+    padding: 0 0;
+    border: none;
+    margin-right: 8px;
+    /* Стиль */
+    display: block;
+    width: 28px;
+    height: 23px;
+    position: relative;
+    background: inherit;
+    cursor: pointer;
+    z-index: 50;
+ }
+
+ .burger-btn_fix{
+    position: fixed;
+    right: 30px;
+    top: 26px;
+ }
+
+ .burger-btn::before{
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    top: 0;
+    right: 0;
+    background: #FFFFFF;
+ }
+
+ .burger-btn__line{
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    top: 10px;
+    right: 0;
+    background: #FFFFFF;
+ }
+
+
+ .burger-btn::after{
+    content: "";
+    position: absolute;
+    width: 28px;
+    height: 3px;
+    bottom: 0;
+    right: 0;
+    background: #FFFFFF;
+ }
+}
+ 

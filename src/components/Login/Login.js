@@ -2,32 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Auth from "../Auth/Auth";
 
-function Register(props) {
+function Login(props) {
   return (
     <Auth
-      title="Добро пожаловать!"
-      buttonText="Зарегистрироваться"
+      title="Рады видеть!"
+      buttonText="Войти"
       hint={
         <div className="auth__hint">
-          <p className="auth__hint-text">Уже зарегистрированы?</p>
-          <Link to="/signin" className="auth__hint-link">
-            Войти
+          <p className="auth__hint-text">Ещё не зарегистрированы?</p>
+          <Link to="/signup" className="auth__hint-link">
+            Регистрация
           </Link>
         </div>
       }
     >
-      <fieldset class="auth__fieldset auth__fieldset_type_register">
-        <label htmlFor="name" className="auth__label">
-          <h3 className="auth__input-subtitle">Имя</h3>
-          <input
-            className="auth__input"
-            id="name"
-            name="name"
-            placeholder="Елизавета"
-            required
-          />
-        </label>
-
+      <fieldset class="auth__fieldset auth__fieldset_type_login">
         <label htmlFor="email" className="auth__label">
           <h3 className="auth__input-subtitle">E-mail</h3>
           <input
@@ -50,11 +39,10 @@ function Register(props) {
             placeholder="password"
             required
           />
-          <p className="auth__error">Что-то пошло не так...</p>
         </label>
       </fieldset>
     </Auth>
   );
 }
 
-export default Register;
+export default Login;

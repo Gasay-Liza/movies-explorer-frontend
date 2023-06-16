@@ -8,6 +8,12 @@
 }
 
 .page__content{
+  width: 100%;
+  background: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   max-width: 1280px;
   min-width: 320px;
 }
