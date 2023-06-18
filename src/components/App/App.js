@@ -29,7 +29,7 @@ function App() {
         {/* <Main/> */}
         {headerActive && <Header />}
         <Routes>
-          <Route path="/f" element={<Main />} />
+          <Route path="/" element={<Main />} />
         </Routes>
         <Routes>
           <Route path="/movies" element={<Movies />} />
@@ -43,12 +43,9 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Register />} />
         </Routes>
-        {/* <Routes>
-          <Route path="/ggg" element={<Main />} />
-        </Routes>
         <Routes>
-          <Route path="/" element={<PageNotFound />} />
-        </Routes> */}
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
         {footerActive && <Footer />}
       </div>
     </div>

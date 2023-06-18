@@ -2,7 +2,8 @@
     /* Ширина контейнера */
     width: 100%;
     max-width: 410px;
-
+    box-sizing: border-box;
+    height: calc(100vh - 74px);
     display: flex;
     flex-direction: column;
     justify-content: center;

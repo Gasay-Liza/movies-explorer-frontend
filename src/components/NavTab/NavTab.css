@@ -60,8 +60,6 @@ nav-container__overlay
     cursor: pointer;
  }
 
-
-
  .navtab__link:active{
     border-bottom: solid 2px #FFFFFF;;
  }
@@ -157,7 +155,4 @@ nav-container__overlay
             gap: 15px;
         }
     
-        .navtab__link_type_profile{
-            
-        }
 }

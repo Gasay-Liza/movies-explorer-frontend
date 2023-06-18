@@ -13,7 +13,7 @@ function Header(props) {
      setBurgerMenuActive(!burgerMenuActive);
   }
 
-  const isMain = useLocation().pathname === "/h";
+  const isMain = useLocation().pathname === "/";
   console.log(isMain);
   return (
     <header
