@@ -4,10 +4,11 @@ import "./BurgerButton.css";
 function BurrgerButton({onClick, isMenuActive}) {
     return (
       <button
-        className={`burger-btn ${isMenuActive ? "burger-btn_fix" : ""}`}
+        className={`burger-btn ${isMenuActive ? "burger-btn_close" : ""}`}  
         onClick={onClick}
       >
-        <span className="burger-btn__line" />
+      {/* Если бургер меню открыто - добавляется класс с анимацией бургер-кнопки */}
+        <span className={`burger-btn__line ${isMenuActive ? "burger-btn__line_close" : ""}`} />
       </button>
     );
 }

@@ -13,7 +13,7 @@ function Header(props) {
      setBurgerMenuActive(!burgerMenuActive);
   }
 
-  let isMain = useLocation().pathname === "/f";
+  const isMain = useLocation().pathname === "/f";
   return (
     <header
       className={`header page__section ${isMain ? "header_theme_blue" : ""}`}

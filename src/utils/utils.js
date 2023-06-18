@@ -11,6 +11,7 @@ import pic10 from "../images/pic__10.png";
 import pic11 from "../images/pic__11.png";
 import pic12 from "../images/pic__12.png";
 
+const checkPath = useLocation().pathname === "/f";
 const testMoviesCards = [
   {
     nameRU: "33 слова о дизайне",
