@@ -71,6 +71,7 @@
     /* Сброс */
     padding: 0 0;
     border: none;
+    outline: none;
     /* Стиль текста */
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
@@ -80,6 +81,11 @@
     text-align: right;
     color: #FFFFFF;
     background: #202020;
+}
+
+.profile__input:focus { 
+    /* Сброс при введении*/
+    background: inherit;
 }
 
 
