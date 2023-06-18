@@ -7,7 +7,7 @@ function Footer(props) {
         Учебный проект Яндекс.Практикум х BeatFilm.
       </p>
       <div className="footer__block">
-        <p className="footer_year">&#169; 2023</p>
+        <p className="footer__year">&#169; 2023</p>
         <ul className="footer__socials">
           <li className="footer__social">
             <a

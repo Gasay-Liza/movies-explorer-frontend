@@ -27,7 +27,7 @@
     align-items: center;
 }
 
-.footer_year {
+.footer__year {
     margin: 0 0;
     padding: 0 0;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -88,7 +88,7 @@
         gap: 30px;
     }
     
-    .footer_year {
+    .footer__year {
         font-size: 12px;
         line-height: 15px;
         color: #8B8B8B;
