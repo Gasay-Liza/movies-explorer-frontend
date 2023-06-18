@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import "./Header.css";
 import logoPath from "../../images/header-logo.svg";
 import AuthLinks from "../AuthLinks/AuthLinks";
@@ -18,7 +18,10 @@ function Header(props) {
     <header
       className={`header page__section ${isMain ? "header_theme_blue" : ""}`}
     >
-      <img className="header__logo" src={logoPath} alt="Логотип" />
+      <Link to="/" className="header__logo-link page__link">
+        <img className="header__logo" src={logoPath} alt="Логотип" />
+      </Link>
+
       {isMain ? (
         <AuthLinks />
       ) : (
