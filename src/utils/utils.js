@@ -1,3 +1,5 @@
+
+
 import pic1 from "../images/pic__1.png";
 import pic2 from "../images/pic__2.png";
 import pic3 from "../images/pic__3.png";
@@ -11,7 +13,12 @@ import pic10 from "../images/pic__10.png";
 import pic11 from "../images/pic__11.png";
 import pic12 from "../images/pic__12.png";
 
-const checkPath = useLocation().pathname === "/f";
+
+export function checkPath(arr, path) {
+  return arr.includes(path);
+}
+
+
 const testMoviesCards = [
   {
     nameRU: "33 слова о дизайне",

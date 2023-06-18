@@ -3,21 +3,26 @@ import promoImage from "../../images/promo-img.svg";
 
 function Promo(props) {
   return (
-    <section className="promo">
-      <div className="promo_container">
+    <section
+      aria-label="Баннер страницы «О проекте»"
+      className="promo page__section"
+    >
+      <div className="promo__container">
         <h1 className="promo__title">
-          Учебный проект студента<br />
-          факультета <br />
-          Веб-разработки.
+          Учебный проект студента факультета Веб-разработки.
         </h1>
         <p className="promo__subtitle">
           Листайте ниже, чтобы узнать больше про этот проект и его создателя.
         </p>
-        <button type="button" className="promo_btn">
+        <a className="page__link promo__link" href="#aboutme">
           Узнать больше
-        </button>
+        </a>
       </div>
-      <img className="promo_img" src={promoImage}></img>
+      <img
+        className="promo__img"
+        src={promoImage}
+        alt='Множество слов "WEB" в форме глобуса'
+      ></img>
     </section>
   );
 }

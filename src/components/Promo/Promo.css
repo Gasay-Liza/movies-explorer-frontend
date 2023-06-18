@@ -1,14 +1,13 @@
 .promo { 
-    max-width: 1280px;
-    box-sizing: border-box;
-    padding: 75px 70px 85px 70px;
+    padding: 75px 70px;
     background-color: hsl(198, 81%, 14%);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
-.promo_container { 
+.promo__container { 
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +38,10 @@
     opacity: 0.5;
  }
 
-.promo_btn { 
+.promo__link { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 146px 0 0 0;
     padding: 0 0;
     width: 129px;
@@ -55,7 +57,7 @@
     border-radius: 3px;
 }
 
-.promo_img { 
+.promo__img { 
     max-width: 310px;
     max-height: 304px;
 }
@@ -86,11 +88,11 @@
         max-width: 260px;
      }
 
-     .promo_btn { 
+     .promo__link { 
         margin: 92px auto 0;
     }
     
-    .promo_img { 
+    .promo__img { 
         margin: 0 auto;
     }
 }
@@ -104,17 +106,18 @@
         margin-top:  44px; 
         font-size: 30px;
         line-height: 38px;
+        letter-spacing: -0.04em;
     }
                         
     .promo__subtitle {
         margin-top: 24px;
      }
 
-     .promo_btn { 
+     .promo__link { 
         margin-top: 80px;
     }
     
-    .promo_img { 
+    .promo__img { 
         max-width: 210px;
         max-height: 206px;
     }

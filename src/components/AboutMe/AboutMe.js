@@ -3,7 +3,7 @@ import myPhoto from "../../images/my-photo.jpg";
 
 function AboutMe(props) {
   return (
-    <section className="about-me">
+    <section className="about-me" id="#aboutme">
       <h2 className="about-me__title">Студент</h2>
       <div className="about-me__container">
         <div className="about-me__content">

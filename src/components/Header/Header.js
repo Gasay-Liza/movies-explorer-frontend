@@ -13,19 +13,23 @@ function Header(props) {
      setBurgerMenuActive(!burgerMenuActive);
   }
 
-  const isMain = useLocation().pathname === "/f";
+  const isMain = useLocation().pathname === "/";
   return (
     <header
       className={`header page__section ${isMain ? "header_theme_blue" : ""}`}
     >
       <img className="header__logo" src={logoPath} alt="Логотип" />
-      {/* {isMain ? <AuthLinks /> : <NavTab />} */}
+      {isMain ? (
+        <AuthLinks />
+      ) : (
+        <NavTab isburgerMenuActive={burgerMenuActive} /> && (
+          <BurgerButton
+            onClick={handleBurgerBtnClick}
+            isMenuActive={burgerMenuActive}
+          />
+        )
+      )}
       <Overlay isActive={burgerMenuActive} />
-      <NavTab isburgerMenuActive={burgerMenuActive} />
-      <BurgerButton
-        onClick={handleBurgerBtnClick}
-        isMenuActive={burgerMenuActive}
-      />
     </header>
   );
 }

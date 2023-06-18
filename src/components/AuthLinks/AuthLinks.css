@@ -42,3 +42,22 @@
     align-items: center;
     color: #000000;
  }
+
+
+@media screen and (max-width: 420px){
+
+    .auth-links__list { 
+        gap: 14px;
+    }
+    
+    .auth-links__link { 
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .auth-links__link_type_login {
+        width: 54px;
+        min-height: 26px;
+        padding: 5px 12px;
+    }
+}
