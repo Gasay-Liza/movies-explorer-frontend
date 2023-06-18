@@ -12,9 +12,9 @@ function Main(props) {
     return (
       <main className="main">
         <Promo />
-        {/* <AboutProject />
+        <AboutProject />
         <Techs />
-        <AboutMe />
+        {/* <AboutMe />
         <Portfolio /> */}
       </main>
     );

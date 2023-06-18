@@ -1,8 +1,7 @@
 .about-project{
-    width: 100%;
-    max-width: 1280px;
-    box-sizing: border-box;
     margin: 0 0;
+    display: flex;
+    flex-direction: column;
     padding: 110px 70px;
     background: inherit;
 }
@@ -11,7 +10,7 @@
     margin: 0 0;
     padding: 0 0 23px;
     max-width: 100%;
-    border-bottom: 2px solid #DADADA;
+    border-bottom: 1px solid #DADADA;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -26,7 +25,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: minmax(min-content,max-content) minmax(min-content,max-content);
-    gap: 40px 26px;
+    gap: 26px 40px;
     margin: 70px 0 0 0;
     padding: 0 0;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -35,6 +34,7 @@
 }
 .about-project__subtitle {
     margin: 0 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -45,9 +45,10 @@
 
 .about-project__text {
     margin: 0 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-weight: 400;
-    font-size: 12px;
-    line-height: 18px;
+    font-size: 14px;
+    line-height: 20px;
  }
 
  .about-project__bar {
@@ -55,7 +56,7 @@
     margin: 110px 0 0 0;
     padding: 0 0;
     display: grid;
-    grid-template-columns: minmax(max-content, 1fr) minmax(max-content, 4fr);
+    grid-template-columns: 228px 1fr;
     align-items: center;
     justify-content: center;
 }
@@ -63,10 +64,11 @@
 .about-project__bar-block {
     margin: 0 0;
     padding: 9px 14px;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 18px;
     text-align: center;
     order: -1;
 }
@@ -89,7 +91,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    color: #A0A0A0;
+    color:  #8B8B8B;
     padding: 14px 10px 0 10px;
 }
 
@@ -100,11 +102,17 @@
     }
     
     .about-project__container { 
-        gap: 30px 22px;
+        gap: 22px 30px;
     }
+
+    .about-project__text {
+        font-size: 12px;
+        line-height: 18px;
+     }
 
     .about-project__bar {
         margin: 93px 0 0 0;
+        grid-template-columns: 140px 1fr;
     }
 }
 
@@ -141,7 +149,8 @@
     }
 
     .about-project__bar {
-        margin: 60px 0 0 0;
+        margin: 56px 0 0 0;
+        grid-template-columns: 100px 1fr;
     }
     
 
