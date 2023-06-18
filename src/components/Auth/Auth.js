@@ -5,20 +5,22 @@ import logo from "../../images/header-logo.svg";
 
 function Auth({ title, buttonText, hint, children, }) {
   return (
-    <main className="auth">
-      <Link to="/" className="auth__logo-link">
-        <img className="auth__logo" src={logo} alt="Логотип" />
-      </Link>
+    <section className="auth page__section">
+      <div class="auth__inner">
+        <Link to="/" className="auth__logo-link">
+          <img className="auth__logo" src={logo} alt="Логотип" />
+        </Link>
 
-      <h1 className="auth__title">{title}</h1>
-      <form className="auth__form">
-        {children}
-        <button type="submit" className="auth__btn">
-          {buttonText}
-        </button>
-      </form>
-      {hint}
-    </main>
+        <h1 className="auth__title">{title}</h1>
+        <form className="auth__form">
+          {children}
+          <button type="submit" className="auth__btn page__button">
+            {buttonText}
+          </button>
+        </form>
+        {hint}
+      </div>
+    </section>
   );
 }
 

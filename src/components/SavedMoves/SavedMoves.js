@@ -11,10 +11,8 @@ function SavedMovies(props) {
 
   return (
     <section className="movies">
-      <Header isAuthorized={true} />
       <SearchForm />
       <MoviesCardList movies={testMoviesCards} />
-      <Footer />
     </section>
   );
 }

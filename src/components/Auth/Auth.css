@@ -1,8 +1,14 @@
 .auth {
     width: 100%;
-    max-width: 396px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .auth__inner{
+    width: 100%;
+    max-width: 396px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -100,8 +106,6 @@
     max-width: 396px;
     min-height: 45px;
     border: none;
-    background: #4285F4;
-    border-radius: 3px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -140,8 +144,8 @@
  }
 
  @media (max-width: 420px) {
-    .auth {
-        box-sizing: border-box;
+
+    .auth__inner{
         max-width: 260px;
         align-items: center;
         justify-content: center;

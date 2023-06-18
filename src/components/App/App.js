@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 import { headerPaths, footerPaths } from "../../utils/constans";
 import { checkPath } from "../../utils/utils";
 import "./App.css";
+import SavedMovies from "../SavedMoves/SavedMoves";
 
 
 function App() {
@@ -28,18 +29,21 @@ function App() {
         {/* <Main/> */}
         {headerActive && <Header />}
         <Routes>
-          <Route path="/d" element={<Main />} />
+          <Route path="/f" element={<Main />} />
         </Routes>
         <Routes>
-          <Route path="/" element={<Movies />} />
+          <Route path="/movies" element={<Movies />} />
+        </Routes>
+        <Routes>
+          <Route path="/saved-movies" element={<SavedMovies />} />
+        </Routes>
+        <Routes>
+          <Route path="/signin" element={<Login />} />
+        </Routes>
+        <Routes>
+          <Route path="/signup" element={<Register />} />
         </Routes>
         {/* <Routes>
-          <Route path="/hhhv" element={<Login />} />
-        </Routes>
-        <Routes>
-          <Route path="/hhh" element={<Register />} />
-        </Routes>
-        <Routes>
           <Route path="/ggg" element={<Main />} />
         </Routes>
         <Routes>
