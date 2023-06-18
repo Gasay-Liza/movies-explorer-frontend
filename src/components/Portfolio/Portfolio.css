@@ -1,14 +1,14 @@
 .portfolio {
-    max-width: 1280px;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
     margin: 0 0;
     padding:  0 70px 125px;
-    background: #202020;
+    background: inherit;
 }
 
 .portfolio__title { 
+    margin: 0 0;
     text-align: left;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
@@ -42,7 +42,6 @@
  }
 
 .portfolio__link { 
-    text-decoration: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -69,7 +68,7 @@
 
  @media screen and (max-width: 860px){
     .portfolio {
-        padding:  0 50px 90px;
+        padding:  0 50px 70px;
     }
     
     .portfolio__text {
