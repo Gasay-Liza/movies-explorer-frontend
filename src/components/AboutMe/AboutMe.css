@@ -1,8 +1,7 @@
 .about-me { 
-    max-width: 1280px;
     box-sizing: border-box;
     padding: 100px 70px;
-    background: #202020;
+    background: inherit;
 }
 .about-me__title {
     margin: 0 0;
@@ -73,11 +72,11 @@
     mix-blend-mode: normal;
  }
 
-
 .about-me__contacts {
     margin: 100px 0 0 0;
     padding: 0 0;
  }
+ 
 .about-me__link {
     
     text-decoration: none;
@@ -89,6 +88,7 @@
     line-height: 17px;
     color: #FFFFFF;
  }
+
 .about-me__link-text { 
     margin: 0 0;
 }

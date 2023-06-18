@@ -14,8 +14,8 @@ function Main(props) {
         <Promo />
         <AboutProject />
         <Techs />
-        {/* <AboutMe />
-        <Portfolio /> */}
+        <AboutMe />
+        {/* <Portfolio /> */}
       </main>
     );
 }
