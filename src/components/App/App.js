@@ -28,7 +28,10 @@ function App() {
         {/* <Main/> */}
         {headerActive && <Header />}
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/d" element={<Main />} />
+        </Routes>
+        <Routes>
+          <Route path="/" element={<Movies />} />
         </Routes>
         {/* <Routes>
           <Route path="/hhhv" element={<Login />} />

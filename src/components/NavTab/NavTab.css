@@ -33,9 +33,17 @@ nav-container__overlay
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: flex-start;
     align-items: center;
-    gap: 30px;
 }
+
+.navtab__item { 
+    margin-right: 20px;
+}
+.navtab__item:last-child {
+    margin-right: 0;
+ }
+
 
 .navtab__link {
     padding-bottom: 4px;
@@ -51,6 +59,8 @@ nav-container__overlay
     text-decoration: none;
     cursor: pointer;
  }
+
+
 
  .navtab__link:active{
     border-bottom: solid 2px #FFFFFF;;
@@ -68,6 +78,7 @@ nav-container__overlay
 
 .navtab__link_type_saved-moves{
     font-weight: 400;
+    margin-right: 30px;
 }
 
 .navtab__profile-icon{
@@ -109,12 +120,18 @@ nav-container__overlay
         padding: 0 90px;
         gap: 22px;
     }
+    .navtab__item { 
+        margin-right: 0;
+    }
 
     .navtab__link {
         font-size: 18px;
         line-height: 22px;
      }
 
+    .navtab__link_type_saved-moves{
+        margin-right: 0;
+    }
 
     .navtab__link_type_profile{
         position: fixed;

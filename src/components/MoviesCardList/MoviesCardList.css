@@ -61,7 +61,7 @@
 }
 
 
-    @media screen and (max-width: 420px){
+    @media screen and (max-width: 520px){
         .movies-cards{
             padding: 40px 14px 0;
         }

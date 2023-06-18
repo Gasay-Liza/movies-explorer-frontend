@@ -8,17 +8,10 @@ import Footer from "../Footer/Footer";
 
 
 function Movies(props) {
-  const [cards, setCards] = React.useState([]);
-
-
-
   return (
     <section className="movies">
-      <Header
-        isAuthorized = {true} />
       <SearchForm />
       <MoviesCardList movies={testMoviesCards} />
-      <Footer />
     </section>
   );
 }

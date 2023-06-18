@@ -13,7 +13,8 @@ function Header(props) {
      setBurgerMenuActive(!burgerMenuActive);
   }
 
-  const isMain = useLocation().pathname === "/";
+  const isMain = useLocation().pathname === "/h";
+  console.log(isMain);
   return (
     <header
       className={`header page__section ${isMain ? "header_theme_blue" : ""}`}
@@ -22,12 +23,13 @@ function Header(props) {
       {isMain ? (
         <AuthLinks />
       ) : (
-        <NavTab isburgerMenuActive={burgerMenuActive} /> && (
+        <div className="header__links">
+          <NavTab isburgerMenuActive={burgerMenuActive} />
           <BurgerButton
             onClick={handleBurgerBtnClick}
             isMenuActive={burgerMenuActive}
           />
-        )
+        </div>
       )}
       <Overlay isActive={burgerMenuActive} />
     </header>

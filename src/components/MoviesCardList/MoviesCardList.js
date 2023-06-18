@@ -5,7 +5,7 @@ function MoviesCardList({
   movies,
 }) {
   return (
-    <section className="movies-cards">
+    <section className="movies-cards page__section">
       <ul className="movies-cards__list">
         {movies.map((movie) => (
           <MoviesCard movie={movie} />

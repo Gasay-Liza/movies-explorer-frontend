@@ -67,7 +67,7 @@
 
     .movie-card__description { 
         box-sizing: border-box;
-        padding: 14px 22px 14px;
+        padding: 14px 22px 14px 14px;
         height: 72px;
     }
 
@@ -84,7 +84,7 @@
 
     .movie-card__description { 
         box-sizing: border-box;
-        padding: 14px 18px 14px;
+        padding: 14px 18px 14px 14px;
         height: 69px;
     }
 
