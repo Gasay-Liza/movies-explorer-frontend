@@ -4,7 +4,7 @@ import Auth from "../Auth/Auth";
 
 function Register(props) {
   return (
-    <div class="page page__wrapper" aria-label="Cтраница регистрации">
+    <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth
         title="Добро пожаловать!"
         buttonText="Зарегистрироваться"
@@ -17,14 +17,16 @@ function Register(props) {
           </div>
         }
       >
-        <fieldset class="auth__fieldset auth__fieldset_type_register">
+        <fieldset className="auth__fieldset auth__fieldset_type_register">
           <label htmlFor="name" className="auth__label">
             <h3 className="auth__input-subtitle">Имя</h3>
             <input
               className="auth__input"
               id="name"
+              type="text"
               name="name"
-              placeholder="Елизавета"
+              minLength="2"
+              placeholder="Имя"
               required
             />
           </label>
@@ -34,7 +36,7 @@ function Register(props) {
             <input
               className="auth__input"
               id="email"
-              name="email"
+              name="Почта"
               type="email"
               placeholder="pochta@yandex.ru"
               required
@@ -48,7 +50,8 @@ function Register(props) {
               id="password"
               name="password"
               type="password"
-              placeholder="password"
+              minLength="8"
+              placeholder="Пароль"
               required
             />
             <p className="auth__error">Что-то пошло не так...</p>

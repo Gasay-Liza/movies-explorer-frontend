@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState} from "react";
+import { useLocation } from "react-router-dom";
 import "./Header.css";
 import logoPath from "../../images/header-logo.svg";
 import AuthLinks from "../AuthLinks/AuthLinks";
@@ -14,7 +14,6 @@ function Header(props) {
   }
 
   const isMain = useLocation().pathname === "/";
-  console.log(isMain);
   return (
     <header
       className={`header page__section ${isMain ? "header_theme_blue" : ""}`}

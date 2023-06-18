@@ -6,7 +6,7 @@ import logo from "../../images/header-logo.svg";
 function Auth({ title, buttonText, hint, children, }) {
   return (
     <section className="auth page__section">
-      <div class="auth__inner">
+      <div className="auth__inner">
         <Link to="/" className="auth__logo-link">
           <img className="auth__logo" src={logo} alt="Логотип" />
         </Link>

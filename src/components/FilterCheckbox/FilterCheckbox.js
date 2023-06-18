@@ -2,7 +2,7 @@ import "./FilterCheckbox.css";
 
 function FilterCheckbox(props) {
     return (
-      <label for="checkbox" className="filter-checkbox">
+      <label htmlFor="checkbox" className="filter-checkbox">
         <input
           type="checkbox"
           className="filter-checkbox__real"

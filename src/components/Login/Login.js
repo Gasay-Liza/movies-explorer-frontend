@@ -4,7 +4,7 @@ import Auth from "../Auth/Auth";
 
 function Login(props) {
   return (
-    <div class="page page__wrapper" aria-label="Cтраница авторизации">
+    <div className="page page__wrapper" aria-label="Cтраница авторизации">
       <Auth
         title="Рады видеть!"
         buttonText="Войти"
@@ -17,7 +17,7 @@ function Login(props) {
           </div>
         }
       >
-        <fieldset class="auth__fieldset auth__fieldset_type_login">
+        <fieldset className="auth__fieldset auth__fieldset_type_login">
           <label htmlFor="email" className="auth__label">
             <h3 className="auth__input-subtitle">E-mail</h3>
             <input
@@ -25,7 +25,9 @@ function Login(props) {
               id="email"
               name="email"
               type="email"
-              placeholder="pochta@yandex.ru"
+              placeholder="Почта"
+              minLength="2"
+              maxLength="30"
               required
             />
           </label>
@@ -37,7 +39,9 @@ function Login(props) {
               id="password"
               name="password"
               type="password"
-              placeholder="password"
+              placeholder="Пароль"
+              minLength="8"
+              maxLength="30"
               required
             />
           </label>

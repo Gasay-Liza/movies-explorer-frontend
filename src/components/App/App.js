@@ -26,25 +26,15 @@ function App() {
   return (
     <div className="page">
       <div className="page__content">
-        {/* <Main/> */}
         {headerActive && <Header />}
         <Routes>
           <Route path="/" element={<Main />} />
-        </Routes>
-        <Routes>
           <Route path="/movies" element={<Movies />} />
-        </Routes>
-        <Routes>
           <Route path="/saved-movies" element={<SavedMovies />} />
-        </Routes>
-        <Routes>
-          <Route path="/signin" element={<Login />} />
-        </Routes>
-        <Routes>
           <Route path="/signup" element={<Register />} />
-        </Routes>
-        <Routes>
+          <Route path="/signin" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
         {footerActive && <Footer />}
       </div>

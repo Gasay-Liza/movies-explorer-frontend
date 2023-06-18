@@ -60,9 +60,13 @@ nav-container__overlay
     cursor: pointer;
  }
 
- .navtab__link:active{
+ .navtab__link_active{
     border-bottom: solid 2px #FFFFFF;;
  }
+
+ /* .navtab__link:active{
+    border-bottom: solid 2px #FFFFFF;;
+ } */
 
 .navtab__link_type_main{
     display: none;
