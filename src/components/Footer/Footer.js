@@ -10,13 +10,19 @@ function Footer(props) {
         <p className="footer_year">&#169; 2023</p>
         <ul className="footer__socials">
           <li className="footer__social">
-            <a href="#" className="footer__social-link">
+            <a
+              href="https://practicum.yandex.ru"
+              className="footer__social-link"
+            >
               Яндекс.Практикум
             </a>
           </li>
 
           <li className="footer__social">
-            <a href="#" className="footer__social-link">
+            <a
+              href="https://github.com/Gasay-Liza"
+              className="footer__social-link"
+            >
               Github
             </a>
           </li>
