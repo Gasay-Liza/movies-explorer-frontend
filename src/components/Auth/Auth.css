@@ -8,6 +8,8 @@
 
  .auth__inner{
     width: 100%;
+    display: flex;
+    flex-direction: column;
     max-width: 396px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
