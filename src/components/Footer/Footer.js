@@ -12,7 +12,7 @@ function Footer(props) {
           <li className="footer__social">
             <a
               href="https://practicum.yandex.ru"
-              className="footer__social-link"
+              className="footer__social-link page__link"
             >
               Яндекс.Практикум
             </a>
@@ -21,7 +21,7 @@ function Footer(props) {
           <li className="footer__social">
             <a
               href="https://github.com/Gasay-Liza"
-              className="footer__social-link"
+              className="footer__social-link page__link"
             >
               Github
             </a>
