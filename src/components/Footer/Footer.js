@@ -11,6 +11,8 @@ function Footer(props) {
         <ul className="footer__socials">
           <li className="footer__social">
             <a
+              target="_blank"
+              rel="noreferrer"
               href="https://practicum.yandex.ru"
               className="footer__social-link page__link"
             >
@@ -20,6 +22,8 @@ function Footer(props) {
 
           <li className="footer__social">
             <a
+              target="_blank"
+              rel="noreferrer"
               href="https://github.com/Gasay-Liza"
               className="footer__social-link page__link"
             >

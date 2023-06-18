@@ -14,10 +14,10 @@ function AboutMe(props) {
           <div className="about-me__description">
             <p className="about-me__paragraph">
               Я работаю инженером-конструктором, но очень увлечена
-              веб-разработкой. Я учусь на Я.Практикуме и изучаю
-              HTML, CSS, JavaScript и React. Я уже создала несколько проектов
-              под присмотром опытных наставников и получаю обратную связь в
-              рамках ревью. Могу легко сверстать страницы по макету и добавить
+              веб-разработкой. Я учусь на Я.Практикуме и изучаю HTML, CSS,
+              JavaScript и React. Я уже создала несколько проектов под
+              присмотром опытных наставников и получаю обратную связь в рамках
+              ревью. Могу легко сверстать страницы по макету и добавить
               адаптивность и кроссбраузерность.
             </p>
             <p className="about-me__paragraph">
@@ -31,7 +31,12 @@ function AboutMe(props) {
             </p>
           </div>
           <nav className="about-me__contacts">
-            <a href="https://github.com/Gasay-Liza" className="page__link about-me__link">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://github.com/Gasay-Liza"
+              className="page__link about-me__link"
+            >
               <p className="about-me__link-text">Github</p>
             </a>
           </nav>
