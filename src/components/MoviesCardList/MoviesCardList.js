@@ -1,5 +1,6 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 
 function MoviesCardList({
   movies,
@@ -11,7 +12,7 @@ function MoviesCardList({
           <MoviesCard movie={movie} />
         ))}
       </ul>
-      <button type="button" className="movies-cards__btn">Ещё</button>
+      <MoreFilmsButton/>
     </section>
   );
 }
