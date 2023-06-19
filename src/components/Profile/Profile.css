@@ -1,0 +1,138 @@
+.profile { 
+    /* Ширина контейнера */
+    width: 100%;
+    max-width: 410px;
+    box-sizing: border-box;
+    height: calc(100vh - 74px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 74px 10px 70px;
+}
+
+.profile__form{
+    width: 100%;
+}
+
+.profile__title {
+    /* Сброс */
+    margin: 0 0;
+    /* Стиль текста */
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+    color: #FFFFFF;
+ }
+
+.profile__fieldset{
+    /* Сброс */
+    margin: 0 0;
+    padding: 0 0;
+    border: none;
+    /* Отступ сверху */
+    margin-top: 120px;
+
+ }
+
+.profile__input-container { 
+    margin-top: 14px;
+    height: 33px;
+    border-bottom: 1px solid #424242;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.profile__input-container:last-child{
+    border-bottom: none;
+}
+
+.profile__label {
+    margin-top: 3px;
+    width: 40%;
+    /* Стиль текста */
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 14px;
+    color: #FFFFFF;
+}
+
+.profile__input { 
+    width: 60%;
+    height: 100%;
+    /* Сброс */
+    padding: 0 0;
+    border: none;
+    outline: none;
+    /* Стиль текста */
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    text-align: right;
+    color: #FFFFFF;
+    background: #202020;
+}
+
+.profile__input:focus { 
+    /* Сброс при введении*/
+    background: inherit;
+}
+
+
+.button{
+    /* Сброс */
+    padding: 0 0;
+    border: none;
+}
+
+.profile__button{
+    width: 100%;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #202020;
+}
+
+.button_type_edit-profile{
+    margin: 204px 0 16px;
+}
+
+
+.profile__link{
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    width: 100%;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #FFFFFF;
+    background: #202020;
+}
+
+.profile__link_type_logout{
+    color: #EE3465;
+}

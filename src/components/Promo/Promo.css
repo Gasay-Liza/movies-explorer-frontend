@@ -1,0 +1,125 @@
+.promo { 
+    padding: 75px 70px;
+    background-color: hsl(198, 81%, 14%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.promo__container { 
+    display: flex;
+    flex-direction: column;
+}
+
+.promo__title {
+    margin:  0 0; 
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    text-align: left;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    max-width: 640px;
+}
+
+.promo__subtitle {
+    margin: 36px 0 0 0;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    text-align: left;
+    max-width: 310px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: #FFFFFF;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+ }
+
+.promo__link { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 146px 0 0 0;
+    padding: 0 0;
+    width: 129px;
+    height: 36px;
+    background-color: inherit;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    color: #FFFFFF;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px;
+}
+
+.promo__img { 
+    max-width: 310px;
+    max-height: 304px;
+}
+
+@media screen and (max-width: 860px){
+    .promo { 
+        padding: 140px 44px 76px 40px;
+        flex-direction: column-reverse;
+    }
+    
+    .promo_container { 
+        flex-direction: column;
+    }
+
+    .promo__title {
+        margin-top:  48px; 
+        text-align: center;
+        color: #FFFFFF;
+        font-style: normal;
+        max-width:100%;
+        font-size: 40px;
+        line-height: 50px;
+    }
+    
+    .promo__subtitle {
+        margin: 22px auto 0;
+        text-align: center;
+        max-width: 260px;
+     }
+
+     .promo__link { 
+        margin: 92px auto 0;
+    }
+    
+    .promo__img { 
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .promo { 
+        padding: 70px 10px 30px;
+    }
+
+    .promo__title {
+        margin-top:  44px; 
+        font-size: 30px;
+        line-height: 38px;
+        letter-spacing: -0.04em;
+    }
+                        
+    .promo__subtitle {
+        margin-top: 24px;
+     }
+
+     .promo__link { 
+        margin-top: 80px;
+    }
+    
+    .promo__img { 
+        max-width: 210px;
+        max-height: 206px;
+    }
+}
+
