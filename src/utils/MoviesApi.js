@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-export const BASE_URL = "https://api.nomoreparties.co";
+import { BASE_URL } from "./constans";
 
 class MoviesApi {
   constructor({ baseUrl, headers, credentials }) {
-    this._baseUrl = baseUrl;
+    this._baseUrl = BASE_URL;
     this._headers = headers;
     this._credentials = credentials;
   }

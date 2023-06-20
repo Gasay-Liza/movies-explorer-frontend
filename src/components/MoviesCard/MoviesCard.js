@@ -1,5 +1,5 @@
 import "./MoviesCard.css";
-
+import { BASE_URL } from "../../utils/constans";
 function MoviesCard({
   movie,
 }) {
@@ -7,7 +7,7 @@ function MoviesCard({
     <li className="movie-card">
       <img
         className="movie-card__image"
-        src={movie.image.url}
+        src={`${BASE_URL}${movie.image.url}`}
         alt={`Кадр из фильма "${movie.nameRU}"`}
       />
       <div className="movie-card__description">
