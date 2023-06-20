@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-
+import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import testMoviesCards from "../../utils/utils";
+
 import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 
-function Movies(props) {
+function Movies({ moviesCards }) {
+  console.log(moviesCards);
   return (
     <section className="movies">
       <SearchForm />
-      <MoviesCardList movies={testMoviesCards} />
+      <MoviesCardList moviesCards={moviesCards} />
       <MoreFilmsButton />
     </section>
   );
