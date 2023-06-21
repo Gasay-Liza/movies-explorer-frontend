@@ -1,7 +1,7 @@
 import "./MoviesCard.css";
 import { BASE_URL } from "../../utils/constans";
 function MoviesCard({
-  movie,
+  movie, cbTrailerLink
 }) {
   return (
     <li className="movie-card">
@@ -9,6 +9,7 @@ function MoviesCard({
         className="movie-card__image"
         src={`${BASE_URL}${movie.image.url}`}
         alt={`Кадр из фильма "${movie.nameRU}"`}
+        onClick={cbTrailerLink}
       />
       <div className="movie-card__description">
         <div className="movie-card__name-container">

@@ -14,8 +14,9 @@
     padding: 80px 0 0;
     border-top: 1px solid #424242;
     width: 100%;
-    display: grid;
+    justify-items: center;
     gap: 37px 24px;
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     background: inherit;
 }
@@ -44,7 +45,7 @@
     border-radius: 6px;
 }
 
-@media screen and (max-width: 860px){
+@media screen and (max-width: 920px){
     .movies-cards{
         padding: 40px 30px 0;
     }
@@ -61,7 +62,7 @@
 }
 
 
-    @media screen and (max-width: 520px){
+    @media screen and (max-width: 560px){
         .movies-cards{
             padding: 40px 14px 0;
         }
@@ -75,4 +76,6 @@
             margin: 76px auto 80px;
             max-width: 240px;
         }
+
+        
 }
