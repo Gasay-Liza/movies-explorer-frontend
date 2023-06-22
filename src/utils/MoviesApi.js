@@ -23,13 +23,13 @@ class MoviesApi {
     return fetch(url, options).then(this._checkResponse);
   }
 
-  // Получение карточек с сервера
-  getInitialMoviesCards() {
-    return this._request(`${this._baseUrl}/beatfilm-movies`, {
-      headers: this._headers,
-    });
+  // Получение начальных карточек фильмов с сервера
+  getInitialMovies() {
+    return this._request(`${this._baseUrl}/beatfilm-movies`)
+      .then(this._checkResponse)
   }
 }
+
 
 const moviesApi = new MoviesApi({
   baseUrl: "https://api.nomoreparties.co",
@@ -39,3 +39,4 @@ const moviesApi = new MoviesApi({
 });
 
 export default moviesApi;
+

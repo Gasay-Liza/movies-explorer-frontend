@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import Header from "../Header/Header";
@@ -14,24 +14,12 @@ import { headerPaths, footerPaths } from "../../utils/constans";
 import { checkPath } from "../../utils/utils";
 import "./App.css";
 import SavedMovies from "../SavedMoves/SavedMoves";
-import moviesApi from "../../utils/MoviesApi";
+
 function App() {
-  
   const currentLocation = useLocation().pathname;
-  
+
   const headerActive = checkPath(headerPaths, currentLocation);
   const footerActive = checkPath(footerPaths, currentLocation);
-  const [moviesCards, setMoviesCards] = React.useState([]);
-  React.useEffect(() => {
-    moviesApi
-      .getInitialMoviesCards()
-      .then((cards) => {
-        setMoviesCards(cards);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <div className="page">
@@ -41,7 +29,10 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route
             path="/movies"
-            element={<Movies moviesCards={moviesCards} />}
+            element={
+              <Movies
+              />
+            }
           />
           <Route path="/saved-movies" element={<SavedMovies />} />
           <Route path="/signup" element={<Register />} />

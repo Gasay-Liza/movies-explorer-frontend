@@ -3,14 +3,13 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 
 
 function MoviesCardList({
-  moviesCards,
+  movies, 
 }) {
-  console.log(moviesCards);
 
   return (
     <section className="movies-cards page__section">
       <ul className="movies-cards__list">
-        {moviesCards.map((movie) => (
+        {movies.map((movie) => (
           <MoviesCard movie={movie} />
         ))}
       </ul>
