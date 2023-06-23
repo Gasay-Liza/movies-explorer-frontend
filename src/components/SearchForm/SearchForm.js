@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ onSubmit, queryMovie, setQueryMovie }) {
-  const [nameMovie, setNameMovie] = useState("");
-  const [value, setValue] = useState("");
-  // function handleChange(e) {
-  //   console.log(e.target.value);
-  //   return (e.target.value);
-  // }
-  
+function SearchForm({
+  onSubmit,
+  searchName,
+  setSearchName,
+  isShortFilm,
+  setIsShortFilm,
+}) {
   return (
     <section
       className="search-form page__section"
@@ -22,9 +21,9 @@ function SearchForm({ onSubmit, queryMovie, setQueryMovie }) {
           id="search-form"
           name="Поиск"
           placeholder="Фильм"
-          value={queryMovie}
+          value={searchName}
           onChange={(e) => {
-            setQueryMovie(e.target.value);
+            setSearchName(e.target.value);
           }}
           required
         />
@@ -33,7 +32,10 @@ function SearchForm({ onSubmit, queryMovie, setQueryMovie }) {
           className="search-form__btn page__button"
         ></button>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox
+        isShortFilm={isShortFilm}
+        setIsShortFilm={setIsShortFilm}
+      />
     </section>
   );
 }

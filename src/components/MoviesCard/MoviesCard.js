@@ -1,5 +1,7 @@
 import "./MoviesCard.css";
 import { BASE_URL } from "../../utils/constans";
+import {getConvertedTime} from "../../utils/getСonvertedTime"
+
 function MoviesCard({
   movie, cbTrailerLink
 }) {
@@ -21,7 +23,7 @@ function MoviesCard({
           />
         </div>
 
-        <p className="movie-card__duration">{movie.duration}</p>
+        <p className="movie-card__duration">{getConvertedTime(movie.duration)}</p>
       </div>
     </li>
   );
