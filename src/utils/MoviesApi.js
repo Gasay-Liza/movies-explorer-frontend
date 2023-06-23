@@ -15,7 +15,6 @@ class MoviesApi {
     }
     // если ошибка, отклоняем промис
     console.log(res);
-    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   //Запрос на сервер
@@ -23,20 +22,22 @@ class MoviesApi {
     return fetch(url, options).then(this._checkResponse);
   }
 
+
   // Получение начальных карточек фильмов с сервера
   getInitialMovies() {
-    return this._request(`${this._baseUrl}/beatfilm-movies`)
-      .then(this._checkResponse)
+    return this._request(`${this._baseUrl}/beatfilm-movies`, {
+      headers: this._headers,
+    });
   }
 }
 
 
-const moviesApi = new MoviesApi({
+const beatfilmMoviesApi = new MoviesApi({
   baseUrl: "https://api.nomoreparties.co",
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-export default moviesApi;
+export default beatfilmMoviesApi;
 

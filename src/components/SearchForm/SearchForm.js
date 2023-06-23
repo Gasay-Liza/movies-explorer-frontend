@@ -2,9 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ onSubmit }) {
+function SearchForm({ onSubmit, queryMovie, setQueryMovie }) {
   const [nameMovie, setNameMovie] = useState("");
   const [value, setValue] = useState("");
+  // function handleChange(e) {
+  //   console.log(e.target.value);
+  //   return (e.target.value);
+  // }
+  
   return (
     <section
       className="search-form page__section"
@@ -17,10 +22,9 @@ function SearchForm({ onSubmit }) {
           id="search-form"
           name="Поиск"
           placeholder="Фильм"
-          value={value}
-          onChange={(event, newValue) => {
-            setNameMovie(newValue);
-            setValue(newValue);
+          value={queryMovie}
+          onChange={(e) => {
+            setQueryMovie(e.target.value);
           }}
           required
         />
