@@ -8,6 +8,7 @@ function SearchForm({
   setSearchName,
   isShortFilm,
   setIsShortFilm,
+  onChangeCheckbox,
 }) {
   return (
     <section
@@ -35,6 +36,7 @@ function SearchForm({
       <FilterCheckbox
         isShortFilm={isShortFilm}
         setIsShortFilm={setIsShortFilm}
+        onChange={onChangeCheckbox}
       />
     </section>
   );
