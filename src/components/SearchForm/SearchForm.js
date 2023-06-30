@@ -5,11 +5,12 @@ import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 function SearchForm({
   onSubmit,
   searchName,
-  setSearchName,
-  isShortFilm,
-  setIsShortFilm,
-  onChangeCheckbox,
+  handleToggleCheckbox,
+  handleChangeMovieName,
+  setIsShortFilms,
+  isShortFilms
 }) {
+
   return (
     <section
       className="search-form page__section"
@@ -23,9 +24,7 @@ function SearchForm({
           name="Поиск"
           placeholder="Фильм"
           value={searchName}
-          onChange={(e) => {
-            setSearchName(e.target.value);
-          }}
+          onChange={handleChangeMovieName}
           required
         />
         <button
@@ -34,9 +33,9 @@ function SearchForm({
         ></button>
       </form>
       <FilterCheckbox
-        isShortFilm={isShortFilm}
-        setIsShortFilm={setIsShortFilm}
-        onChange={onChangeCheckbox}
+        isShortFilms={isShortFilms}
+        setIsShortFilms={setIsShortFilms}
+        handleToggleCheckbox={handleToggleCheckbox}
       />
     </section>
   );
