@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -8,17 +8,54 @@ import beatfilmMoviesApi from "../../utils/MoviesApi";
 
 function Movies() {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
-  const [movies, setMovies] = useState([]); // Показываемые фильмы на странице
-  const [searchMovies, setSearchMovies] = useState([]); // Результат поиска фильмов
-  const [searchName, setSearchName] = useState(""); // Название фильма в поисковике
-  const [shortMovies, setShortMovies] = useState([]); // Результат поиска фильмов
-  const [isShortFilm, setIsShortFilm] = useState(false); // Короткометражки
-  const savedMoviesPerPage = JSON.parse(localStorage.getItem("moviesPerPage"));
-  const savedSearchedMovie = localStorage.getItem("searchName");
-  const savedStateCheckbox = localStorage.getItem("stateCheckbox");
+  const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
+  const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem("moviesPerPage")) ?? []); // Результат поиска фильмов
+  // const [searchName, setSearchName] = useState(localStorage.getItem('searchName') ?? ''); // Название фильма в поисковике
+  // const [isShortFilms, setIsShortFilms] = useState(JSON.parse(localStorage.getItem('stateCheckbox')) ?? false); // Короткометражки
+  // const [foundMovies, setFoundMovies] = useState([]); // Результат поиска фильмов
+  const [searchName, setSearchName] = useState(''); // Название фильма в поисковике
+  const [isShortFilms, setIsShortFilms] = useState(false); // Короткометражки
+  const savedMoviesPerPage = JSON.parse(localStorage.getItem("moviesPerPage")) ?? [];
+  const savedSearchName = localStorage.getItem("searchName") ?? '';
+  const savedStateCheckbox = JSON.parse(localStorage.getItem("stateCheckbox")) ?? false;
 
-  useEffect(() => {
-    // Сохраняем фильмы из в beatfilmMovies в localStorage
+// При клике на поиск фильма
+function submitSearch(e){ 
+  e.preventDefault();
+  const filter = filterBySearch(isShortFilms);
+  setRenderMovies(filter);
+}
+
+
+function handleChangeMovieName(e) { // При вводе в форму
+  setSearchName(e.target.value);
+}
+
+const handleToggleCheckbox = useCallback(
+  (isChecked) => {
+    console.log()
+    console.log(isChecked)
+    setIsShortFilms(isChecked);
+    const filter = filterBySearch(isChecked);
+    setRenderMovies(filter);
+  }, [isShortFilms, savedMoviesPerPage]
+);
+
+// Фильтрация поиска по слову и чекбоксу
+const filterBySearch = useCallback((isChecked) => { 
+      let updatedList = [...allMovies]; // Сделаем копию списка фильмов
+      updatedList = updatedList.filter((movie) => { 
+      return( (isChecked ?  movie.duration <= 40 : movie) && (
+          movie.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
+          movie.nameEN.toLowerCase().includes(searchName.toLowerCase()) // Проверка в EN имени
+      ))}
+      )
+      return updatedList
+}, [allMovies, searchName]);
+
+
+useEffect(() => {
+    // Загружаем фильмы в beatfilmMovies в localStorage
     beatfilmMoviesApi
       .getInitialMovies()
       .then((movies) => {
@@ -30,80 +67,45 @@ function Movies() {
       });
   }, []);
 
+  // useEffect(() => {
+  //   setRenderMovies(foundMovies);
+  // }, [foundMovies]);
+
+
+  // При перезагрузке страницы отображаются c LocalStorage:
   useEffect(() => {
-    // При перезагрузке страницы отображаются фильмы localStorage(moviesPerPage)
-    setMovies(savedMoviesPerPage);
-    // Имя фильма е в поисковике
-    setSearchName(savedSearchedMovie);
-    // состояние чек-бокса
-    setIsShortFilm(savedStateCheckbox);
+    //Фильмы на страницу
+    setRenderMovies(savedMoviesPerPage);
+    // Название фильма в поисковике
+    setSearchName(savedSearchName)
+    //Состояние чекбокса
+    setIsShortFilms(savedStateCheckbox)
   }, []);
 
+  // Сохраняю данные запроса, чекбокса, показываемых фильмов в localStorage
   useEffect(() => {
-    // При изменении фильмов данные перезаписываются в localStorage
-    localStorage.setItem("moviesPerPage", JSON.stringify(movies));
-    localStorage.setItem("searchName", searchName);
-    // localStorage.setItem("stateCheckbox", isShortFilm);
-  }, [movies]);
-
-  useEffect(() => {
-    localStorage.setItem("stateCheckbox", isShortFilm);
-  }, [isShortFilm]);
-
-  function handleSearch(e) {
-    // Функция при нажатии сабмита поиска
-    e.preventDefault();
-    filterBySearch(e); // Реализуем поиск по названию фильма
-
-    // Результат поиска записываем в localStorage(moviesPerPage)
-    console.log("movies", movies);
-  }
-
-  function handleChangeCheckbox() {
-    // Функция при нажатии сабмита поиска
-    isShortFilm ? filterByShort() : isShortFilm && filterByShort(); // Реализуем поиск по названию фильма
-
-    // Результат поиска записываем в localStorage(moviesPerPage)
-    console.log("movies", movies);
-  }
-
-  function filterBySearch(e) {
-    let updatedList = [...allMovies]; // Сделаем копию списка фильмов
-    updatedList = updatedList.filter((item) => {
-      return (
-        item.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
-        item.nameEN.toLowerCase().includes(searchName.toLowerCase()) // Проверка в EN имени
+      localStorage.setItem('moviesPerPage', JSON.stringify(renderMovies)); // Сохраняем в LocalStorage
+      localStorage.setItem('searchName', searchName);
+      localStorage.setItem(
+        'stateCheckbox',
+        JSON.stringify(isShortFilms)
       );
-    });
-    // Результаты поиска запишем в стейт
-    // setSearchMovies(updatedList); // Запись в стейт 
-    return setMovies(updatedList);
-    
-  }
+  }, [searchName, isShortFilms]);
+  
 
-  function filterByShort() {
-    let updatedList = [...allMovies]; // Сделаем копию списка фильмов
-    updatedList = updatedList.filter((item) => {
-      // Отфильтруем список на значение инпута
-      return (
-        item.duretion <= 40 // Проверка
-      );
-    });
-    // Результаты поиска запишем в стейт
-    return setShortMovies(updatedList);
-  }
 
   return (
     <section className="movies">
       <SearchForm
-        isShortFilm={isShortFilm}
-        setIsShortFilm={setIsShortFilm}
-        onChangeCheckbox={handleChangeCheckbox}
-        onSubmit={handleSearch}
-        searchName={searchName}
-        setSearchName={setSearchName}
+        onSubmit={submitSearch}
+        searchName = {searchName}
+        setSearchName = {setSearchName}
+        handleChangeMovieName = {handleChangeMovieName}
+        handleToggleCheckbox = {handleToggleCheckbox}
+        isShortFilms={isShortFilms}
+        setIsShortFilms={setIsShortFilms}
       />
-      <MoviesCardList movies={movies} />
+      <MoviesCardList movies={renderMovies} />
       <MoreFilmsButton />
     </section>
   );
