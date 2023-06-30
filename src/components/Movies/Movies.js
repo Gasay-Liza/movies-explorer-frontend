@@ -9,7 +9,7 @@ import beatfilmMoviesApi from "../../utils/MoviesApi";
 function Movies() {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
-  const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem("moviesPerPage")) ?? []); // Результат поиска фильмов
+  // const [foundMovies, setFoundMovies] = useState(JSON.parse(localStorage.getItem("moviesPerPage")) ?? []); // Результат поиска фильмов
   // const [searchName, setSearchName] = useState(localStorage.getItem('searchName') ?? ''); // Название фильма в поисковике
   // const [isShortFilms, setIsShortFilms] = useState(JSON.parse(localStorage.getItem('stateCheckbox')) ?? false); // Короткометражки
   // const [foundMovies, setFoundMovies] = useState([]); // Результат поиска фильмов
@@ -26,11 +26,12 @@ function submitSearch(e){
   setRenderMovies(filter);
 }
 
-
-function handleChangeMovieName(e) { // При вводе в форму
+// При вводе в форму
+function handleChangeMovieName(e) { 
   setSearchName(e.target.value);
 }
 
+// Колбэк переключения чекбокса короткометражек
 const handleToggleCheckbox = useCallback(
   (isChecked) => {
     console.log()
@@ -90,7 +91,7 @@ useEffect(() => {
         'stateCheckbox',
         JSON.stringify(isShortFilms)
       );
-  }, [searchName, isShortFilms]);
+  }, [searchName, isShortFilms, renderMovies]);
   
 
 
