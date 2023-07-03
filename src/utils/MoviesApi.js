@@ -40,4 +40,3 @@ const beatfilmMoviesApi = new MoviesApi({
 });
 
 export default beatfilmMoviesApi;
-

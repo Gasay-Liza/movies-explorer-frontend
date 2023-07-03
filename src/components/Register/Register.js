@@ -1,13 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useCallback, useState} from 'react';
+import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
+import useValidation from '../../hooks/useValidation';
+function Register({isLoading, onRegister, isLoggedIn}) {
+const {navigate, values, errors, handleChange, resetValidation, isValid} = useValidation();
 
-function Register(props) {
+  const handleSubmit = useCallback((e) => {
+      e.preventDefault();
+      resetValidation();
+      onRegister(values.name, values.email, values.password);
+  },[onRegister, values])
+  
+
+  if (isLoggedIn){
+      navigate('/', { replace: true })
+  }
+
   return (
     <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth
+        isValid={isValid}
         title="Добро пожаловать!"
-        buttonText="Зарегистрироваться"
+        buttonText={isLoading ? "Регистрация..." : "Зарегистрироваться"}
         hint={
           <div className="auth__hint">
             <p className="auth__hint-text">Уже зарегистрированы?</p>
@@ -16,6 +30,7 @@ function Register(props) {
             </Link>
           </div>
         }
+        handleSubmit={handleSubmit}
       >
         <fieldset className="auth__fieldset auth__fieldset_type_register">
           <label htmlFor="name" className="auth__label">
@@ -25,10 +40,12 @@ function Register(props) {
               id="name"
               type="text"
               name="name"
+              onChange={handleChange}
+              value={values.name  || ''}
               minLength="2"
-              placeholder="Имя"
               required
             />
+            <span className="auth__error">{errors.name || ''}</span>
           </label>
 
           <label htmlFor="email" className="auth__label">
@@ -36,25 +53,28 @@ function Register(props) {
             <input
               className="auth__input"
               id="email"
-              name="Почта"
+              name="email"
               type="email"
-              placeholder="pochta@yandex.ru"
+              onChange={handleChange}
+              value={values.email || ''}
               required
             />
+            <span className="auth__error">{errors.email || ''}</span>
           </label>
 
           <label htmlFor="password" className="auth__label">
             <h3 className="auth__input-subtitle">Пароль</h3>
             <input
-              className="auth__input auth__input_type_password"
+              className={`auth__input ${errors.password==="" ? "" : "auth__input_type_invalid"}`}
               id="password"
               name="password"
               type="password"
+              onChange={handleChange}
+              value={values.password || ''} 
               minLength="8"
-              placeholder="Пароль"
               required
             />
-            <p className="auth__error">Что-то пошло не так...</p>
+            <span className="auth__error">{errors.password || ''}</span>
           </label>
         </fieldset>
       </Auth>
