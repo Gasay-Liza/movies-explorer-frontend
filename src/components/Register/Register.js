@@ -2,14 +2,15 @@ import React, {useCallback, useState} from 'react';
 import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
-function Register({isLoading, onRegister, isLoggedIn}) {
+function Register({isLoading, onRegister, isLoggedIn, infoToolTipText}) {
 const {navigate, values, errors, handleChange, resetValidation, isValid} = useValidation();
 
   const handleSubmit = useCallback((e) => {
       e.preventDefault();
-      resetValidation();
-      onRegister(values.name, values.email, values.password);
-  },[onRegister, values])
+      // resetValidation();
+      console.log(values)
+      onRegister(values);
+  },[values, onRegister])
   
 
   if (isLoggedIn){
@@ -20,6 +21,7 @@ const {navigate, values, errors, handleChange, resetValidation, isValid} = useVa
     <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth
         isValid={isValid}
+        infoToolTipText={infoToolTipText}
         title="Добро пожаловать!"
         buttonText={isLoading ? "Регистрация..." : "Зарегистрироваться"}
         hint={
@@ -65,7 +67,7 @@ const {navigate, values, errors, handleChange, resetValidation, isValid} = useVa
           <label htmlFor="password" className="auth__label">
             <h3 className="auth__input-subtitle">Пароль</h3>
             <input
-              className={`auth__input ${errors.password==="" ? "" : "auth__input_type_invalid"}`}
+              className={`auth__input ${errors.password ==="" ? "" : "auth__input_type_invalid"}`}
               id="password"
               name="password"
               type="password"

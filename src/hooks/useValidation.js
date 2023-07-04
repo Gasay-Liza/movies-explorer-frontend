@@ -14,12 +14,8 @@ const handleChange = (e) => {
     setValues((values) => ({...values,[name]: value}));
     setErrors((errors) => ({...errors,[name]: e.target.validationMessage
   }));
-
   setIsValid(e.target.closest("form").checkValidity());
 }
-
-
-
 
   const resetValidation= useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {

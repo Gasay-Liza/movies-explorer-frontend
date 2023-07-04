@@ -33,11 +33,26 @@ function App() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [infoToolTipText, setInfoToolTipText] = React.useState("");
 
+  // Колбэк регистрации
+  const cbRegister = useCallback(async ({name, email, password}) => {
+    setLoading(true);
+    try {
+      await mainApi.register({name, email, password});
+      setIsSuccess(true);
+    } catch (err) {
+      console.log(err);
+      setInfoToolTipText(err);
+      setIsSuccess(false);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   //Колбэк авторизации
   const cbLogin = useCallback(async (email, password) => {
     setLoading(true);
     try {
-      const data = await mainApi.authorized(email, password);
+      const data = await mainApi.authorized({email, password});
       if (data.message) {
         console.log("data", data)
         console.log("email", email);
@@ -55,21 +70,7 @@ function App() {
     }
   }, []);
 
-  const cbRegister = useCallback(async (name, email, password) => {
-    setLoading(true);
-    try {
-      await mainApi.register(name, email, password);
-      setIsSuccess(true);
-      navigate("/sign-in", { replace: true });
-      setInfoToolTipText("Вы успешно зарегистрировались!");
-    } catch (err) {
-      console.log(err);
-      setInfoToolTipText(err);
-      setIsSuccess(false);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+
 
   // const cbTokenCheck = useCallback(async () => {
   //   try {
@@ -121,10 +122,10 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/saved-movies" element={<SavedMovies />} />
-          <Route path="/signup" element={<Register onRegister={cbRegister} isLoading={isLoading}/>} />
+          <Route path="/signup" element={<Register onRegister={cbRegister} isLoading={isLoading} infoToolTipText={infoToolTipText}/>} />
           <Route
             path="/signin"
-            element={<Login onLogin={cbLogin} isLoggedIn={loggedIn} isLoading={isLoading}/>}
+            element={<Login onLogin={cbLogin} isLoggedIn={loggedIn} isLoading={isLoading} infoToolTipText={infoToolTipText}/>}
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<PageNotFound />} />

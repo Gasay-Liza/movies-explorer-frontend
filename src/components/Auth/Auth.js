@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Auth.css";
 import logo from "../../images/header-logo.svg";
 
-function Auth({ title, buttonText, hint, children, handleSubmit, isValid }) {
+function Auth({ title, buttonText, hint, children, handleSubmit, isValid, infoToolTipText  }) {
   return (
     <section className="auth page__section">
       <div className="auth__inner">
@@ -14,6 +14,7 @@ function Auth({ title, buttonText, hint, children, handleSubmit, isValid }) {
         <h1 className="auth__title">{title}</h1>
         <form className="auth__form" onSubmit={handleSubmit}>
           {children}
+          <span className="auth__error auth__api-error">{infoToolTipText}</span>
           <button type="submit" className="auth__btn page__button" disabled={!isValid}>
             {buttonText}
           </button>

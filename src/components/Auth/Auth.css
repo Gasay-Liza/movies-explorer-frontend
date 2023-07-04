@@ -99,6 +99,7 @@
 
 .auth__error{
     display: flex;
+    flex-direction: column;
     margin: 6px 0 6px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
@@ -108,6 +109,10 @@
     color: #EE3465;
 }
 
+.auth__api-error{
+    align-items: center;
+    margin: 0 0 14px;
+}
 
 .auth__btn {
     width: 100%; 

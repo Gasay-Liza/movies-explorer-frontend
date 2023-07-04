@@ -1,5 +1,5 @@
-import React, {useCallback, useState, useEffect} from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import React, {useCallback, useEffect} from 'react';
+import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
 
@@ -10,8 +10,9 @@ function Login({onLogin, isLoggedIn, onLoading}) {
 const handleSubmit = useCallback((e) => {
     e.preventDefault();
     resetValidation();
-    onLogin(values.email, values.password);
-},[onLogin, values])
+    onLogin(values);
+    console.log(values)
+},[values, onLogin, resetValidation])
 
 useEffect(() => {
     if (isLoggedIn) {
@@ -39,6 +40,7 @@ useEffect(() => {
           <label htmlFor="email" className="auth__label">
             <h3 className="auth__input-subtitle">E-mail</h3>
             <input
+              autoComplete='on'
               className="auth__input"
               id="email"
               name="email"
@@ -57,6 +59,7 @@ useEffect(() => {
           <label htmlFor="password" className="auth__label">
             <h3 className="auth__input-subtitle">Пароль</h3>
             <input
+              autoComplete='on'
               className={`auth__input ${errors.password==="" ? "" : "auth__input_type_invalid"}`}
               id="password"
               name="password"
