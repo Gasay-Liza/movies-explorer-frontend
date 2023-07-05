@@ -30,45 +30,42 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [infoToolTipText, setInfoToolTipText] = React.useState("");
+  const [textServerError, setTextServerError] = React.useState("");
 
   // Колбэк регистрации
-  const cbRegister = useCallback(async ({name, email, password}) => {
+async function handleRegister({name, email, password}) {
     setLoading(true);
     try {
-      await mainApi.register({name, email, password});
-      setIsSuccess(true);
-    } catch (err) {
-      console.log(err);
-      setInfoToolTipText(err);
-      setIsSuccess(false);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  //Колбэк авторизации
-  const cbLogin = useCallback(async (email, password) => {
-    setLoading(true);
-    try {
-      const data = await mainApi.authorized({email, password});
-      if (data.message) {
-        console.log("data", data)
-        console.log("email", email);
-        setEmail(email);
-        setLoggedIn(true);
-        localStorage.setItem("authorized", "true");
-        navigate("/", { replace: true });
+      const data = await mainApi.register({name, email, password});
+      if (data) {
+        handleLogin({email, password});
+        navigate("/movies", { replace: true });
       }
     } catch (err) {
-      console.log(err);
-      setInfoToolTipText(err);
-      setIsSuccess(false);
+      setTextServerError(err);
+      console.error(err);
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
+
+  //Колбэк авторизации
+async function handleLogin({email, password}) {
+    setLoading(true);
+    try {
+      const data = await mainApi.authorize({email, password});
+      if (data.message) {
+        setLoggedIn(true);
+        localStorage.setItem("authorized", "true");
+        navigate("/movies", { replace: true });
+      }
+    } catch (err) {
+      setTextServerError(err);
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
 
@@ -122,10 +119,10 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/saved-movies" element={<SavedMovies />} />
-          <Route path="/signup" element={<Register onRegister={cbRegister} isLoading={isLoading} infoToolTipText={infoToolTipText}/>} />
+          <Route path="/signup" element={<Register onRegister={handleRegister} isLoading={isLoading} textServerError={textServerError} setTextServerError={setTextServerError}/>} />
           <Route
             path="/signin"
-            element={<Login onLogin={cbLogin} isLoggedIn={loggedIn} isLoading={isLoading} infoToolTipText={infoToolTipText}/>}
+            element={<Login onLogin={handleLogin} isLoggedIn={loggedIn} isLoading={isLoading} textServerError={textServerError} setTextServerError={setTextServerError}/>}
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<PageNotFound />} />

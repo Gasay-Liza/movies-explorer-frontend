@@ -112,7 +112,6 @@ const filterBySearch = useCallback((isChecked) => {
 
         // Определяю количество карточек на странице в зависимости от ширины
         useEffect(() => {
-          console.log(windowSize)
           if (foundMovies !== null){
             console.log('f', foundMovies)
             if (windowSize >= 960) {

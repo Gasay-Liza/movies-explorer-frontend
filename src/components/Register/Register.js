@@ -2,26 +2,26 @@ import React, {useCallback, useState} from 'react';
 import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
-function Register({isLoading, onRegister, isLoggedIn, infoToolTipText}) {
-const {navigate, values, errors, handleChange, resetValidation, isValid} = useValidation();
+import {PATTERN_EMAIL, PATTERN_NAME} from '../../utils/constans';
+function Register({isLoading, onRegister, isLoggedIn, textServerError}) {
+const {navigate, values, errors, handleChange, isValid} = useValidation();
 
   const handleSubmit = useCallback((e) => {
       e.preventDefault();
-      // resetValidation();
-      console.log(values)
       onRegister(values);
   },[values, onRegister])
   
 
   if (isLoggedIn){
-      navigate('/', { replace: true })
+      navigate('/movies', { replace: true })
   }
 
   return (
     <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth
+        isLoading={isLoading}
         isValid={isValid}
-        infoToolTipText={infoToolTipText}
+        textServerError={textServerError}
         title="Добро пожаловать!"
         buttonText={isLoading ? "Регистрация..." : "Зарегистрироваться"}
         hint={
@@ -38,13 +38,14 @@ const {navigate, values, errors, handleChange, resetValidation, isValid} = useVa
           <label htmlFor="name" className="auth__label">
             <h3 className="auth__input-subtitle">Имя</h3>
             <input
-              className="auth__input"
+              className={`auth__input ${errors.name==="" ? "" : "auth__input_type_invalid"}`}
               id="name"
               type="text"
               name="name"
               onChange={handleChange}
               value={values.name  || ''}
               minLength="2"
+              pattern={PATTERN_NAME}
               required
             />
             <span className="auth__error">{errors.name || ''}</span>
@@ -53,12 +54,13 @@ const {navigate, values, errors, handleChange, resetValidation, isValid} = useVa
           <label htmlFor="email" className="auth__label">
             <h3 className="auth__input-subtitle">E-mail</h3>
             <input
-              className="auth__input"
+              className={`auth__input ${errors.email==="" ? "" : "auth__input_type_invalid"}`}
               id="email"
               name="email"
               type="email"
               onChange={handleChange}
               value={values.email || ''}
+              pattern={PATTERN_EMAIL}
               required
             />
             <span className="auth__error">{errors.email || ''}</span>

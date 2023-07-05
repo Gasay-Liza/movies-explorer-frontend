@@ -1,5 +1,4 @@
 import "./MoviesCardList.css";
-import React, { useState, useEffect } from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
 function MoviesCardList({movies}) {

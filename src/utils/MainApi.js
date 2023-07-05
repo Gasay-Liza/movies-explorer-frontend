@@ -11,7 +11,7 @@ class MainApi {
   // если ошибка, отклоняем промис  
   console.log("res", res)    
     return res.json().then((err) => {
-      return Promise.reject(`Error ${res.status}: ${err.message || err.error}`);
+      return Promise.reject(`${err.message}`);
   })
   }
   return res.json();
@@ -39,7 +39,7 @@ register = ({name, email, password}) => {
 }
 
 // Авторизация
-authorize(email, password) {
+authorize({email, password}) {
   return this._request(`${this._baseUrl}/signin`, {
     method: "POST",
     headers: {

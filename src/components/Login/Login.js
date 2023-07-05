@@ -2,30 +2,32 @@ import React, {useCallback, useEffect} from 'react';
 import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
+import {PATTERN_EMAIL} from '../../utils/constans';
 
-function Login({onLogin, isLoggedIn, onLoading}) {
+function Login({onLogin, isLoggedIn, isLoading, textServerError, setTextServerError}) {
 
-  const {navigate, values, errors, handleChange, resetValidation, isValid} = useValidation();
+  const {navigate, values, errors, handleChange, resetValidation, isValid, } = useValidation();
 
 const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    resetValidation();
     onLogin(values);
-    console.log(values)
-},[values, onLogin, resetValidation])
+},[values, onLogin])
 
 useEffect(() => {
     if (isLoggedIn) {
-        navigate('/', { replace: true })
+        navigate('/movies', { replace: true })
     }
 }, );
+
 
   return (
     <div className="page page__wrapper" aria-label="Cтраница авторизации">
       <Auth
+        isLoading={isLoading}
+        textServerError={textServerError}
         isValid={isValid}
         title="Рады видеть!"
-        buttonText={onLoading ? "Вход..." : "Войти"}
+        buttonText={isLoading ? "Вход..." : "Войти"}
         hint={
           <div className="auth__hint">
             <p className="auth__hint-text">Ещё не зарегистрированы?</p>
@@ -41,15 +43,15 @@ useEffect(() => {
             <h3 className="auth__input-subtitle">E-mail</h3>
             <input
               autoComplete='on'
-              className="auth__input"
+              className={`auth__input ${errors.email==="" ? "" : "auth__input_type_invalid"}`}
               id="email"
               name="email"
               type="email"
               minLength="2"
               maxLength="30"
               onChange={handleChange}
-              disabled={onLoading ? true : false}
-              value={values.email}
+              value={values.email  || ''}
+              pattern={PATTERN_EMAIL}
               required
             />
             <span className="auth__error">{errors.email || ''}</span>
@@ -67,8 +69,7 @@ useEffect(() => {
               minLength="8"
               maxLength="30"
               onChange={handleChange}
-              disabled={onLoading ? true : false}
-              value={values.password}
+              value={values.password  || ''}
               required
             />
             <span className="auth__error">{errors.password || ''}</span>

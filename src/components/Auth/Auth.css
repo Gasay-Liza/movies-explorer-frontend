@@ -54,7 +54,7 @@
 }
 
 .auth__fieldset_type_login{
-    margin-bottom: 220px;
+    margin-bottom: 194px;
 }
 
 .auth__label { 
@@ -106,12 +106,20 @@
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
+    min-height: 12px;
     color: #EE3465;
+    opacity: 1;
 }
 
-.auth__api-error{
+.auth__server-error{
     align-items: center;
     margin: 0 0 14px;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.auth__server-error__active{
+    opacity: 0;
 }
 
 .auth__btn {
