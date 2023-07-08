@@ -5,21 +5,20 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 import Preloader from "../Preloader/Preloader";
 import beatfilmMoviesApi from "../../utils/moviesApi";
-import { WINDOW_SIZE_L, WINDOW_SIZE_M, WINDOW_SIZE_S } from "../../utils/constans";
 
 function Movies({}) {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов
-  // const [searchName, setSearchName] = useState(localStorage.getItem('searchName') ?? ''); // Название фильма в поисковике
-  // const [isShortFilms, setIsShortFilms] = useState(JSON.parse(localStorage.getItem('stateCheckbox')) ?? false); // Короткометражки
-  // const [RenderMovies, setRenderMovies] = useState([]); // Результат поиска фильмов
   const [searchName, setSearchName] = useState(''); // Название фильма в поисковике
   const [isShortFilms, setIsShortFilms] = useState(false); // Короткометражки
   const [isLoading, setIsLoading] = useState(false); // Загрузка
   const [windowSize, setWindowSize] = useState(window.innerWidth); // Размер окна
-  const [moreCards, setMoreCards] = useState(window.innerWidth); // Число карточек кнопки еще
-  const savedMoviesPerPage = JSON.parse(localStorage.getItem("moviesPerPage"));
+  const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
+  const [isSearchError, setSearchError] = useState(false);
+  const [moreCards, setMoreCards] = useState(0); // Число карточек кнопки еще
+  const [renderCards, setRenderCards] = useState(null); // Число карточек кнопки еще
+  const savedFoundMovies = JSON.parse(localStorage.getItem("foundMovies"));
   const savedSearchName = localStorage.getItem("searchName") ?? '';
   const savedStateCheckbox = JSON.parse(localStorage.getItem("stateCheckbox")) ?? false;
   
@@ -27,10 +26,16 @@ function Movies({}) {
 function submitSearch(e){ 
   e.preventDefault();
   const filter = filterBySearch(isShortFilms);
-  setFoundMovies(filter)
+  console.log('filter', filter)
+  setFoundMovies(filter);
+  if (filter.length !== 0) {
+    setIsMoviesNotFound(false);
+  } else {
+    setIsMoviesNotFound(true);
+    }
+  console.log('foundMovies', foundMovies)
+  console.log('moviesNotFound', isMoviesNotFound)
 }
-
-
 
 // При вводе в форму
 function handleChangeMovieName(e) { 
@@ -40,13 +45,12 @@ function handleChangeMovieName(e) {
 // Колбэк переключения чекбокса короткометражек
 const handleToggleCheckbox = useCallback(
   (isChecked) => {
-    console.log()
     console.log(isChecked)
     setIsShortFilms(isChecked);
     const filter = filterBySearch(isChecked);
     setFoundMovies(filter);
     console.log('foundMovies', foundMovies)
-  }, [isShortFilms, savedMoviesPerPage, foundMovies]
+  }, [isShortFilms, foundMovies]
 );
 
 // Фильтрация поиска по слову и чекбоксу
@@ -60,6 +64,22 @@ const filterBySearch = useCallback((isChecked) => {
       )
       return updatedList
 }, [allMovies, searchName]);
+
+// Определяю количество карточек на странице в зависимости от ширины
+useEffect(() => {
+  if (windowSize >= 960) {
+     setRenderCards(12)
+     setMoreCards(3)
+   } else if (windowSize < 960 && windowSize  > 560) {
+     setRenderCards(8)
+     setMoreCards(2)
+   } else if (windowSize  <= 560) {
+     setRenderCards(5)
+     setMoreCards(2)
+   }
+   console.log('foundMovies', foundMovies)
+   console.log('renderMovies', renderMovies)       
+}, [windowSize]);
 
 
   // При перезагрузке страницы отображаются c LocalStorage:
@@ -76,7 +96,8 @@ const filterBySearch = useCallback((isChecked) => {
       .then((movies) => {
         localStorage.setItem("allMovies", JSON.stringify(movies));
         setAllMovies(movies); // Сохраняем в стейт
-        setRenderMovies(savedMoviesPerPage);
+        setFoundMovies(savedFoundMovies);
+        console.log(renderCards)
       })
       .catch((err) => {
         console.log(err);
@@ -84,20 +105,28 @@ const filterBySearch = useCallback((isChecked) => {
       .finally(() => setIsLoading(false));
   }, []);
 
+
+  useEffect(() => {
+    if (renderCards && foundMovies){ 
+      setRenderMovies(foundMovies.slice(0, renderCards));
+    }
+  }, [renderCards, foundMovies])
+
+
   // Сохраняю данные запроса, чекбокса, показываемых фильмов в localStorage
   useEffect(() => {
     if (foundMovies !== null ){
-      localStorage.setItem('moviesPerPage', JSON.stringify(foundMovies)); // Сохраняем в LocalStorage
+      localStorage.setItem('foundMovies', JSON.stringify(foundMovies)); // Сохраняем в LocalStorage
     }
+    console.log('fffff')
       localStorage.setItem('searchName', searchName);
       localStorage.setItem(
         'stateCheckbox',
         JSON.stringify(isShortFilms)
       );
-  }, [searchName, isShortFilms, foundMovies]);
+  }, [isShortFilms, foundMovies]);
 
   // Отслеживаю ширину окна
-
   function handleResize() {
     setWindowSize(window.innerWidth)
   };
@@ -110,27 +139,13 @@ const filterBySearch = useCallback((isChecked) => {
     };
   }, [windowSize]);
 
-        // Определяю количество карточек на странице в зависимости от ширины
-        useEffect(() => {
-          if (foundMovies !== null){
-            console.log('f', foundMovies)
-            if (windowSize >= 960) {
-              setRenderMovies(foundMovies.slice(0, 12))
-              console.log('foundMovies.slice(0, 12)',foundMovies.slice(0, 12))
-              setMoreCards(3)
-            } else if (windowSize < 960 && windowSize  > 560) {
-              setRenderMovies(foundMovies.slice(0, 8))
-              setMoreCards(2)
-            } else if (windowSize  <= 560) {
-              setRenderMovies(foundMovies.slice(0, 5))
-              setMoreCards(2)
-            }
-          
-          console.log(foundMovies)
-          console.log(renderMovies)
-          }
-          
-      }, [foundMovies, windowSize, savedMoviesPerPage]);
+  // Колбэк переключения чекбокса короткометражек
+const handleMoreCards = useCallback(
+  () => {
+    console.log(renderCards, moreCards)
+    setRenderCards((prev) => prev + moreCards)
+  }, [renderCards]
+);
 
 
   return (
@@ -150,8 +165,8 @@ const filterBySearch = useCallback((isChecked) => {
         </div> 
       ) : (
       <div className='movies__container'> 
-        <MoviesCardList movies={renderMovies} />
-        <MoreFilmsButton />
+        <MoviesCardList movies={renderMovies}  isMoviesNotFound={isMoviesNotFound} isSearchError={isSearchError} />
+        {foundMovies && (renderCards < foundMovies.length) && <MoreFilmsButton onClick={handleMoreCards}/>}
         </div> 
       )}
     </section>

@@ -32,11 +32,14 @@ function SearchForm({
           className="search-form__btn page__button"
         ></button>
       </form>
-      <FilterCheckbox
-        isShortFilms={isShortFilms}
-        setIsShortFilms={setIsShortFilms}
-        handleToggleCheckbox={handleToggleCheckbox}
-      />
+      
+      <div className="search-form__line">
+        <FilterCheckbox
+          isShortFilms={isShortFilms}
+          setIsShortFilms={setIsShortFilms}
+          handleToggleCheckbox={handleToggleCheckbox}
+        />
+      </div>
     </section>
   );
 }

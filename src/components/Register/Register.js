@@ -1,8 +1,7 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
 import { Link} from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
-import {PATTERN_EMAIL, PATTERN_NAME} from '../../utils/constans';
 function Register({isLoading, onRegister, isLoggedIn, textServerError}) {
 const {navigate, values, errors, handleChange, isValid} = useValidation();
 
@@ -45,7 +44,6 @@ const {navigate, values, errors, handleChange, isValid} = useValidation();
               onChange={handleChange}
               value={values.name  || ''}
               minLength="2"
-              pattern={PATTERN_NAME}
               required
             />
             <span className="auth__error">{errors.name || ''}</span>
@@ -60,7 +58,6 @@ const {navigate, values, errors, handleChange, isValid} = useValidation();
               type="email"
               onChange={handleChange}
               value={values.email || ''}
-              pattern={PATTERN_EMAIL}
               required
             />
             <span className="auth__error">{errors.email || ''}</span>

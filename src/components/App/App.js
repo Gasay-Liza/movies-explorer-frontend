@@ -13,7 +13,7 @@ import Footer from "../Footer/Footer";
 import { headerPaths, footerPaths } from "../../utils/constans";
 import { checkPath } from "../../utils/utils";
 import "./App.css";
-import SavedMovies from "../SavedMoves/SavedMoves";
+// import SavedMovies from "../SavedMoves/SavedMoves";
 
 import mainApi from "../../utils/mainApi";
 import moviesApi from "../../utils/moviesApi";
@@ -31,8 +31,12 @@ function App() {
   const [email, setEmail] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [textServerError, setTextServerError] = React.useState("");
+  
+  
+  const [savedMoves, setSavedMovies] = React.useState([]);
 
-  // Колбэк регистрации
+
+  // Регистрация
 async function handleRegister({name, email, password}) {
     setLoading(true);
     try {
@@ -49,7 +53,7 @@ async function handleRegister({name, email, password}) {
     }
   };
 
-  //Колбэк авторизации
+  // Авторизация
 async function handleLogin({email, password}) {
     setLoading(true);
     try {
@@ -67,6 +71,31 @@ async function handleLogin({email, password}) {
     }
   };
 
+
+async function handleSaveMovieCard(movie) {
+    setLoading(true);
+    try {
+      const newCard = await mainApi.createCard({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: movie.image.url,
+        trailerLink: movie.trailerLink,
+        thumbnail: movie.thumbnail.url,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,});
+      if (newCard) {
+        setSavedMovies([newCard, ...savedMoves]);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   // const cbTokenCheck = useCallback(async () => {
@@ -97,19 +126,19 @@ async function handleLogin({email, password}) {
   //   cbTokenCheck();
   // }, []);
 
-  //При загрузке страницы и успешной авторизации получаем данные профиля
-  React.useEffect(() => {
-    if (!loggedIn) return;
-    mainApi
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-        setEmail(data.email);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [loggedIn]);
+  // //При загрузке страницы и успешной авторизации получаем данные профиля
+  // React.useEffect(() => {
+  //   if (!loggedIn) return;
+  //   mainApi
+  //     .getUserInfo()
+  //     .then((data) => {
+  //       setCurrentUser(data);
+  //       setEmail(data.email);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, [loggedIn]);
 
   return (
     <div className="page">
@@ -118,7 +147,7 @@ async function handleLogin({email, password}) {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/movies" element={<Movies />} />
-          <Route path="/saved-movies" element={<SavedMovies />} />
+          {/* <Route path="/saved-movies" element={<SavedMovies />} /> */}
           <Route path="/signup" element={<Register onRegister={handleRegister} isLoading={isLoading} textServerError={textServerError} setTextServerError={setTextServerError}/>} />
           <Route
             path="/signin"

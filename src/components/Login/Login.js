@@ -51,7 +51,6 @@ useEffect(() => {
               maxLength="30"
               onChange={handleChange}
               value={values.email  || ''}
-              pattern={PATTERN_EMAIL}
               required
             />
             <span className="auth__error">{errors.email || ''}</span>

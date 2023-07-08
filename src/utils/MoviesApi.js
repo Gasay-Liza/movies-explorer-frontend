@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL } from "./constans";
+import { MOVIES_API_URL } from "./constans";
+
 
 class MoviesApi {
   constructor({ baseUrl, headers, credentials }) {
-    this._baseUrl = BASE_URL;
+    this._baseUrl = baseUrl;
     this._headers = headers;
     this._credentials = credentials;
   }
@@ -33,7 +34,7 @@ class MoviesApi {
 
 
 const beatfilmMoviesApi = new MoviesApi({
-  baseUrl: "https://api.nomoreparties.co",
+  baseUrl: MOVIES_API_URL,
   headers: {
     "Content-Type": "application/json",
   },

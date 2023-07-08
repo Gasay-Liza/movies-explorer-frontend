@@ -1,5 +1,5 @@
 import "./MoviesCard.css";
-import { BASE_URL } from "../../utils/constans";
+import { MOVIES_API_URL } from "../../utils/constans";
 import {getConvertedTime} from "../../utils/getСonvertedTime"
 
 function MoviesCard({
@@ -9,7 +9,7 @@ function MoviesCard({
     <li className="movie-card">
       <img
         className="movie-card__image"
-        src={`${BASE_URL}${movie.image.url}`}
+        src={`${MOVIES_API_URL}${movie.image.url}`}
         alt={`Кадр из фильма "${movie.nameRU}"`}
         onClick={cbTrailerLink}
       />

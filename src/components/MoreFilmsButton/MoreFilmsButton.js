@@ -1,6 +1,6 @@
-function MoreFilmsButton() {
+function MoreFilmsButton({onClick}) {
     return (
-       <button type="button" className="movies-cards__btn">
+       <button type="button" className="page__button movies-cards__btn" onClick={onClick}>
         Ещё
       </button>
   );
