@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer";
 import { headerPaths, footerPaths } from "../../utils/constans";
 import { checkPath } from "../../utils/utils";
 import "./App.css";
-import SavedMovies from "../SavedMoves/SavedMoves";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/mainApi";
 import moviesApi from "../../utils/moviesApi";
@@ -36,7 +36,7 @@ function App() {
     setIsLoading(true);
     try {
       const data = await mainApi.register({ name, email, password });
-      console.log(data)
+      console.log(data);
       if (data.message) {
         handleLogin({ email, password });
         navigate("/movies", { replace: true });
@@ -54,7 +54,7 @@ function App() {
     setIsLoading(true);
     try {
       const data = await mainApi.authorize({ email, password });
-      console.log(data)
+      console.log(data);
       if (data.message) {
         setLoggedIn(true);
         localStorage.setItem("authorized", "true");
@@ -120,26 +120,23 @@ function App() {
     }
   }
 
-  // // Удаление карточки
-  // async function handleDeleteMovie(movie) {
-  //   setSavedMovies((prev) =>
-  //     prev.map((card) => {
-  //       if (card.id === movie.id) {
-  //         return card;
-  //       }
-  //     })
-  //   );
-  //   try {
-  //     const data = await mainApi.deleteCard(savedMovie._id);
-  //     if (data) {
-  //       setsavedMovies((state) =>
-  //         state.filter((card) => card._id !== savedMovie._id)
-  //       );
-  //     }
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
+  // Удаление карточки
+  async function handleDeleteMovieCard(movie) {
+    try {
+      const data = await mainApi.deleteCard(savedMovies._id);
+      if (data) {
+        setSavedMovies((prev) =>
+          prev.map((card) => {
+            if (card.movieId === movie.id) {
+              return card;
+            }
+          })
+        );
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const cbLogOut = useCallback(async () => {
     try {
@@ -186,6 +183,7 @@ function App() {
                 <SavedMovies
                   savedMovies={savedMovies}
                   setSavedMovies={setSavedMovies}
+                  onCardDelete={handleDeleteMovieCard}
                 />
               }
             />

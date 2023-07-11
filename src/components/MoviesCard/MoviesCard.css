@@ -47,8 +47,14 @@
 }
 
 .movie-card__delete-btn {
+    padding: 0 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
     background-image: url("../../images/delete-icon.svg");
  }
+
 
  .movie-card__like-btn {
     padding: 0 0;

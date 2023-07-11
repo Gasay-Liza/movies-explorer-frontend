@@ -21,7 +21,7 @@ function MoviesCard({
     <li className="movie-card">
       <img
         className="movie-card__image"
-        src={`${MOVIES_API_URL}${movie.image.url}`}
+        src={location.pathname === "/movies" ? `${MOVIES_API_URL}${movie.image.url}` : `${movie.image}`}
         alt={`Кадр из фильма "${movie.nameRU}"`}
         onClick={cbTrailerLink}
       />
