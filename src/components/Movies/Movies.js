@@ -6,11 +6,11 @@ import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 import Preloader from "../Preloader/Preloader";
 import beatfilmMoviesApi from "../../utils/moviesApi";
 
-function Movies({}) {
+function Movies({ onCardSave }) {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов
-  const [searchName, setSearchName] = useState(''); // Название фильма в поисковике
+  const [searchName, setSearchName] = useState(""); // Название фильма в поисковике
   const [isShortFilms, setIsShortFilms] = useState(false); // Короткометражки
   const [isLoading, setIsLoading] = useState(false); // Загрузка
   const [windowSize, setWindowSize] = useState(window.innerWidth); // Размер окна
@@ -18,156 +18,154 @@ function Movies({}) {
   const [isSearchError, setSearchError] = useState(false);
   const [moreCards, setMoreCards] = useState(0); // Число карточек кнопки еще
   const [renderCards, setRenderCards] = useState(null); // Число карточек кнопки еще
+  const [isSaved, setIsSaved] = useState(false); // Сохранение карточки
   const savedFoundMovies = JSON.parse(localStorage.getItem("foundMovies"));
-  const savedSearchName = localStorage.getItem("searchName") ?? '';
-  const savedStateCheckbox = JSON.parse(localStorage.getItem("stateCheckbox")) ?? false;
-  
-// При клике на поиск фильма
-function submitSearch(e){ 
-  e.preventDefault();
-  const filter = filterBySearch(isShortFilms);
-  console.log('filter', filter)
-  setFoundMovies(filter);
-  if (filter.length !== 0) {
-    setIsMoviesNotFound(false);
-  } else {
-    setIsMoviesNotFound(true);
-    }
-  console.log('foundMovies', foundMovies)
-  console.log('moviesNotFound', isMoviesNotFound)
-}
+  const savedSearchName = localStorage.getItem("searchName") ?? "";
+  const savedStateCheckbox =
+    JSON.parse(localStorage.getItem("stateCheckbox")) ?? false;
 
-// При вводе в форму
-function handleChangeMovieName(e) { 
-  setSearchName(e.target.value);
-}
-
-// Колбэк переключения чекбокса короткометражек
-const handleToggleCheckbox = useCallback(
-  (isChecked) => {
-    console.log(isChecked)
-    setIsShortFilms(isChecked);
-    const filter = filterBySearch(isChecked);
+  // При клике на поиск фильма
+  function submitSearch(e) {
+    e.preventDefault();
+    const filter = filterBySearch(isShortFilms);
+    console.log("filter", filter);
     setFoundMovies(filter);
-    console.log('foundMovies', foundMovies)
-  }, [isShortFilms, foundMovies]
-);
+    if (filter.length !== 0) {
+      setIsMoviesNotFound(false);
+    } else {
+      setIsMoviesNotFound(true);
+    }
+    console.log("foundMovies", foundMovies);
+    console.log("moviesNotFound", isMoviesNotFound);
+  }
 
-// Фильтрация поиска по слову и чекбоксу
-const filterBySearch = useCallback((isChecked) => { 
+  // При вводе в форму
+  function handleChangeMovieName(e) {
+    setSearchName(e.target.value);
+  }
+
+  // Колбэк переключения чекбокса короткометражек
+  const handleToggleCheckbox = useCallback(
+    (isChecked) => {
+      setIsShortFilms(isChecked);
+      const filter = filterBySearch(isChecked);
+      setFoundMovies(filter);
+    },
+    [isShortFilms, foundMovies]
+  );
+
+  // Фильтрация поиска по слову и чекбоксу
+  const filterBySearch = useCallback(
+    (isChecked) => {
       let updatedList = [...allMovies]; // Сделаем копию списка фильмов
-      updatedList = updatedList.filter((movie) => { 
-      return( (isChecked ?  movie.duration <= 40 : movie) && (
-          movie.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
-          movie.nameEN.toLowerCase().includes(searchName.toLowerCase()) // Проверка в EN имени
-      ))}
-      )
-      return updatedList
-}, [allMovies, searchName]);
+      updatedList = updatedList.filter((movie) => {
+        return (
+          (isChecked ? movie.duration <= 40 : movie) &&
+          (movie.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
+            movie.nameEN.toLowerCase().includes(searchName.toLowerCase())) // Проверка в EN имени
+        );
+      });
+      return updatedList;
+    },
+    [allMovies, searchName]
+  );
 
-// Определяю количество карточек на странице в зависимости от ширины
-useEffect(() => {
-  if (windowSize >= 960) {
-     setRenderCards(12)
-     setMoreCards(3)
-   } else if (windowSize < 960 && windowSize  > 560) {
-     setRenderCards(8)
-     setMoreCards(2)
-   } else if (windowSize  <= 560) {
-     setRenderCards(5)
-     setMoreCards(2)
-   }
-   console.log('foundMovies', foundMovies)
-   console.log('renderMovies', renderMovies)       
-}, [windowSize]);
-
+  // Определяю количество карточек на странице в зависимости от ширины
+  useEffect(() => {
+    if (windowSize >= 960) {
+      setRenderCards(12);
+      setMoreCards(3);
+    } else if (windowSize < 960 && windowSize > 560) {
+      setRenderCards(8);
+      setMoreCards(2);
+    } else if (windowSize <= 560) {
+      setRenderCards(5);
+      setMoreCards(2);
+    }
+  }, [windowSize]);
 
   // При перезагрузке страницы отображаются c LocalStorage:
   useEffect(() => {
     // Если данные были сохранены в LocalStorage
-      //Фильмы на страницу
-      // Название фильма в поисковике
-      setSearchName(savedSearchName)
-      //Состояние чекбокса
-      setIsShortFilms(savedStateCheckbox)
-      setIsLoading(true); // Прелоадер включен
-      beatfilmMoviesApi
+    //Фильмы на страницу
+    // Название фильма в поисковике
+    setSearchName(savedSearchName);
+    //Состояние чекбокса
+    setIsShortFilms(savedStateCheckbox);
+    setIsLoading(true); // Прелоадер включен
+    beatfilmMoviesApi
       .getInitialMovies()
       .then((movies) => {
         localStorage.setItem("allMovies", JSON.stringify(movies));
         setAllMovies(movies); // Сохраняем в стейт
         setFoundMovies(savedFoundMovies);
-        console.log(renderCards)
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       })
       .finally(() => setIsLoading(false));
   }, []);
 
-
   useEffect(() => {
-    if (renderCards && foundMovies){ 
+    if (renderCards && foundMovies) {
       setRenderMovies(foundMovies.slice(0, renderCards));
     }
-  }, [renderCards, foundMovies])
-
+  }, [renderCards, foundMovies]);
 
   // Сохраняю данные запроса, чекбокса, показываемых фильмов в localStorage
   useEffect(() => {
-    if (foundMovies !== null ){
-      localStorage.setItem('foundMovies', JSON.stringify(foundMovies)); // Сохраняем в LocalStorage
+    if (foundMovies !== null) {
+      localStorage.setItem("foundMovies", JSON.stringify(foundMovies)); // Сохраняем в LocalStorage
     }
-    console.log('fffff')
-      localStorage.setItem('searchName', searchName);
-      localStorage.setItem(
-        'stateCheckbox',
-        JSON.stringify(isShortFilms)
-      );
+    localStorage.setItem("searchName", searchName);
+    localStorage.setItem("stateCheckbox", JSON.stringify(isShortFilms));
   }, [isShortFilms, foundMovies]);
 
   // Отслеживаю ширину окна
   function handleResize() {
-    setWindowSize(window.innerWidth)
-  };
+    setWindowSize(window.innerWidth);
+  }
 
   // Устанавливаю слушатель на изменение размера окна
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [windowSize]);
 
   // Колбэк переключения чекбокса короткометражек
-const handleMoreCards = useCallback(
-  () => {
-    console.log(renderCards, moreCards)
-    setRenderCards((prev) => prev + moreCards)
-  }, [renderCards]
-);
-
+  const handleMoreCards = useCallback(() => {
+    setRenderCards((prev) => prev + moreCards);
+  }, [renderCards]);
 
   return (
     <section className="movies">
       <SearchForm
         onSubmit={submitSearch}
-        searchName = {searchName}
-        setSearchName = {setSearchName}
-        handleChangeMovieName = {handleChangeMovieName}
-        handleToggleCheckbox = {handleToggleCheckbox}
+        searchName={searchName}
+        setSearchName={setSearchName}
+        handleChangeMovieName={handleChangeMovieName}
+        handleToggleCheckbox={handleToggleCheckbox}
         isShortFilms={isShortFilms}
         setIsShortFilms={setIsShortFilms}
       />
       {isLoading ? (
-        <div className='movies__container'> 
+        <div className="movies__container">
           <Preloader />
-        </div> 
+        </div>
       ) : (
-      <div className='movies__container'> 
-        <MoviesCardList movies={renderMovies}  isMoviesNotFound={isMoviesNotFound} isSearchError={isSearchError} />
-        {foundMovies && (renderCards < foundMovies.length) && <MoreFilmsButton onClick={handleMoreCards}/>}
-        </div> 
+        <div className="movies__container">
+          <MoviesCardList
+            movies={renderMovies}
+            isMoviesNotFound={isMoviesNotFound}
+            isSearchError={isSearchError}
+            onCardSave={onCardSave}
+          />
+          {foundMovies && renderCards < foundMovies.length && (
+            <MoreFilmsButton onClick={handleMoreCards} />
+          )}
+        </div>
       )}
     </section>
   );

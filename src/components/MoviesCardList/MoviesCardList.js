@@ -1,7 +1,7 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList({movies, isMoviesNotFound, isSearchError}) {
+function MoviesCardList({movies, isMoviesNotFound, isSearchError, onCardSave}) {
   return (
     <section className="movies-cards page__section">
       {isMoviesNotFound && (
@@ -17,7 +17,7 @@ function MoviesCardList({movies, isMoviesNotFound, isSearchError}) {
       {movies && !isMoviesNotFound &&
         <ul className="movies-cards__list">
         {movies.map((movie) => (
-          <MoviesCard movie={movie} />
+          <MoviesCard movie={movie} onCardSave={onCardSave}/>
         ))}
       </ul>}
     </section>

@@ -28,10 +28,9 @@ class MainApi {
   // Авторизация
   authorize({ email, password }) {
     return this._request(`${this._baseUrl}/signin`, {
+      credentials: "include",
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
         email,
         password,
@@ -45,13 +44,11 @@ class MainApi {
     return this._request(`${this._baseUrl}/signup`, {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
       body: JSON.stringify({
+        name,
         email,
         password,
-        name,
       }),
     });
   };
@@ -63,10 +60,7 @@ class MainApi {
     return this._request(`${this._baseUrl}/signout`, {
       method: "POST",
       credentials: "include", // теперь куки посылаются вместе с запросом
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     });
   };
 
@@ -76,26 +70,24 @@ class MainApi {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "GET",
       credentials: "include", // теперь куки посылаются вместе с запросом
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
     });
   };
 
-  // // Получение данных профиля с сервера
-  // getUserInfo = ({email, name}) => {
-  //   return this._request(`${this._baseUrl}/users/me`, {
-  //     credentials: "include",
-  //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       email,
-  //       name,
-  //     }),
-  //   });
-  // };
+  // Получение данных профиля с сервера
+  updateUser = ({email, name}) => {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: this._headers,
+      body: JSON.stringify({
+        email,
+        name,
+      }),
+    });
+  };
 
-  // Проверка токена(данных, полученных с профиля)
+  // Получение сохраненных фильмов
   getSavedMovies = () => {
     return this._request(`${this._baseUrl}/movies`, {
       method: "GET",

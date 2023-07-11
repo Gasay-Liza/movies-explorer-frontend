@@ -64,10 +64,6 @@ nav-container__overlay
     border-bottom: solid 2px #FFFFFF;;
  }
 
- /* .navtab__link:active{
-    border-bottom: solid 2px #FFFFFF;;
- } */
-
 .navtab__link_type_main{
     display: none;
 }
@@ -126,6 +122,15 @@ nav-container__overlay
         margin-right: 0;
     }
 
+    .navtab__item_type_profile{
+        width: 100%;
+        right: 0;
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        bottom: 92px;
+    }
+
     .navtab__link {
         font-size: 18px;
         line-height: 22px;
@@ -136,15 +141,8 @@ nav-container__overlay
     }
 
     .navtab__link_type_profile{
-        position: fixed;
-        width: 100%;
-        right: 0;
-        display: flex;
-        justify-content: center;
         font-size: 14px;
         line-height: 16px;
-        position: fixed;
-        bottom: 92px;
     }
 }
 

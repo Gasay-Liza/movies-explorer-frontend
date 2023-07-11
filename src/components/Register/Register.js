@@ -1,9 +1,9 @@
-import React, {useCallback} from 'react';
-import { Link} from "react-router-dom";
+import React, {useCallback, useEffect} from 'react';
+import { Link } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
-function Register({isLoading, onRegister, isLoggedIn, textServerError}) {
-const {navigate, values, errors, handleChange, isValid} = useValidation();
+function Register({isLoading, onRegister, isLoggedIn, textServerError, setTextServerError}) {
+const {values, errors, handleChange, isValid, resetValidation} = useValidation();
 
   const handleSubmit = useCallback((e) => {
       e.preventDefault();
@@ -11,9 +11,10 @@ const {navigate, values, errors, handleChange, isValid} = useValidation();
   },[values, onRegister])
   
 
-  if (isLoggedIn){
-      navigate('/movies', { replace: true })
-  }
+  //Резет валидации ошибки сервера
+  useEffect(() => {
+    setTextServerError("");
+  }, [setTextServerError]);
 
   return (
     <div className="page page__wrapper" aria-label="Cтраница регистрации">

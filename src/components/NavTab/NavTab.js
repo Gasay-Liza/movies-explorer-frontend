@@ -32,7 +32,7 @@ function NavTab({ isburgerMenuActive }) {
             Сохраненные фильмы
           </NavLink>
         </li>
-        <li className="navtab__item">
+        <li className="navtab__item navtab__item_type_profile">
           <NavLink
             to="/profile"
             className={`navtab__link navtab__link_type_profile 
