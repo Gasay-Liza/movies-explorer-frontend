@@ -17,7 +17,7 @@ function MoviesCardList({movies, isMoviesNotFound, isSearchError, onCardSave, on
       {movies && !isMoviesNotFound &&
         <ul className="movies-cards__list">
         {movies.map((movie) => (
-          <MoviesCard movie={movie} onCardSave={onCardSave} onCardDelete={onCardDelete}/>
+          <MoviesCard key={movie._id || movie.id} movie={movie} onCardSave={onCardSave} onCardDelete={onCardDelete}/>
         ))}
       </ul>}
     </section>

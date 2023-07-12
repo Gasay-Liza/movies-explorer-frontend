@@ -50,6 +50,11 @@ function Movies({ onCardSave }) {
       setIsShortFilms(isChecked);
       const filter = filterBySearch(isChecked);
       setFoundMovies(filter);
+      if (filter.length !== 0) {
+        setIsMoviesNotFound(false);
+      } else {
+        setIsMoviesNotFound(true);
+      }
     },
     [isShortFilms, foundMovies]
   );

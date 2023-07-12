@@ -43,6 +43,11 @@ function SavedMovies({ savedMovies, setSavedMovies, onCardDelete }) {
       setIsShortFilms(isChecked);
       const filter = filterBySearch(isChecked);
       setFoundMovies(filter);
+      if (filter.length !== 0) {
+        setIsMoviesNotFound(false);
+      } else {
+        setIsMoviesNotFound(true);
+      }
       console.log("foundMovies", foundMovies);
     },
     [isShortFilms, foundMovies]

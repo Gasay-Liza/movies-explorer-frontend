@@ -19,12 +19,19 @@ function MoviesCard({
 
   return (
     <li className="movie-card">
+      <a
+        className="movies-card__link"
+        href={movie.trailerLink}
+        target="_blank"
+        rel="noreferrer"
+      >
       <img
         className="movie-card__image"
         src={location.pathname === "/movies" ? `${MOVIES_API_URL}${movie.image.url}` : `${movie.image}`}
         alt={`Кадр из фильма "${movie.nameRU}"`}
         onClick={cbTrailerLink}
       />
+      </a>
       <div className="movie-card__description">
         <div className="movie-card__name-container">
           <h3 className="movie-card__name">{movie.nameRU}</h3>
