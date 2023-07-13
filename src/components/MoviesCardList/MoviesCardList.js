@@ -1,7 +1,9 @@
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import {getLikeStatus} from "../../utils/utils";
 
-function MoviesCardList({movies, isMoviesNotFound, isSearchError, onCardSave, onCardDelete}) {
+function MoviesCardList({movies, savedMovies, isMoviesNotFound, isSearchError, onCardSave, onCardDelete}) {
+
   return (
     <section className="movies-cards page__section">
       {isMoviesNotFound && (
@@ -17,7 +19,7 @@ function MoviesCardList({movies, isMoviesNotFound, isSearchError, onCardSave, on
       {movies && !isMoviesNotFound &&
         <ul className="movies-cards__list">
         {movies.map((movie) => (
-          <MoviesCard key={movie._id || movie.id} movie={movie} onCardSave={onCardSave} onCardDelete={onCardDelete}/>
+          <MoviesCard key={movie._id || movie.id} isLiked={getLikeStatus(savedMovies, movie)} movie={movie} onCardSave={onCardSave} onCardDelete={onCardDelete}/>
         ))}
       </ul>}
     </section>

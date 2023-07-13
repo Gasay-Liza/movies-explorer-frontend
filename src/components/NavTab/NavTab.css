@@ -4,6 +4,7 @@ nav-container__overlay
     display: flex;
     flex-direction: row;
     gap: 50px;
+    z-index: 10;
 }
 
 .nav__overlay{

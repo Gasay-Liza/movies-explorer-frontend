@@ -1,10 +1,11 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
+import React, { useState,} from "react";
 import "./MoviesCard.css";
 import { MOVIES_API_URL } from "../../utils/constans";
-import {getConvertedTime} from "../../utils/getСonvertedTime"
+import {getConvertedTime} from "../../utils/utils"
 
 function MoviesCard({
-  movie, cbTrailerLink, isSaved, onCardDelete, onCardSave
+  movie, isLiked, cbTrailerLink, onCardDelete, onCardSave
 }) {
   
   const location = useLocation();
@@ -36,10 +37,10 @@ function MoviesCard({
         <div className="movie-card__name-container">
           <h3 className="movie-card__name">{movie.nameRU}</h3>
           {location.pathname === "/movies" ? <button
-            onClick={handleMovieSave}
+            onClick={isLiked ? handleMovieDelete : handleMovieSave}
             aria-label="Сохранение фильма"
             type="button"
-            className={`page__button movie-card__like-btn ${isSaved ? "movie-card__like-btn_active" : ""}`}
+            className={`page__button movie-card__like-btn ${isLiked ? "movie-card__like-btn_active" : ""}`}
           /> : <button
           onClick={handleMovieDelete}
           aria-label="Удаление из сохраненных"

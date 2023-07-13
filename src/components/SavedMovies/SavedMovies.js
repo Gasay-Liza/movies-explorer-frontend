@@ -5,16 +5,13 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import mainApi from "../../utils/mainApi";
 
-function SavedMovies({ savedMovies, setSavedMovies, onCardDelete }) {
+function SavedMovies({ savedMovies,  onCardDelete }) {
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов
   const [searchName, setSearchName] = useState(""); // Название фильма в поисковике
   const [isShortFilms, setIsShortFilms] = useState(false); // Короткометражки
-  const [isLoading, setIsLoading] = useState(false); // Загрузка
   const [isMoviesNotFound, setIsMoviesNotFound] = useState(false);
   const [isSearchError, setSearchError] = useState(false);
-
-  const [isSaved, setIsSaved] = useState(false); // Сохранение карточки
 
   // При клике на поиск фильма
   function submitSearch(e) {
@@ -56,6 +53,7 @@ function SavedMovies({ savedMovies, setSavedMovies, onCardDelete }) {
   // Фильтрация поиска по слову и чекбоксу
   const filterBySearch = useCallback(
     (isChecked) => {
+      console.log('savedMovies', savedMovies)
       let updatedList = [...savedMovies]; // Сделаем копию списка фильмов
       updatedList = updatedList.filter((movie) => {
         return (
@@ -69,27 +67,33 @@ function SavedMovies({ savedMovies, setSavedMovies, onCardDelete }) {
     [savedMovies, searchName]
   );
 
-  // При перезагрузке страницы загружаем данные с сервера
-  useEffect(() => {
-    setIsLoading(true);
-    mainApi
-      .getSavedMovies()
-      .then((movies) => {
-        setSavedMovies(movies); // Сохраняем в стейт
-        setRenderMovies(movies);
-        console.log(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => setIsLoading(false));
-  }, []);
+  // // При перезагрузке страницы загружаем данные с сервера
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   mainApi
+  //     .getSavedMovies()
+  //     .then((movies) => {
+  //       setSavedMovies(movies); // Сохраняем в стейт
+  //       setRenderMovies(movies);
+  //       console.log(movies);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     })
+  //     .finally(() => setIsLoading(false));
+  // }, []);
 
   useEffect(() => {
     if (foundMovies) {
       setRenderMovies(foundMovies);
     }
   }, [foundMovies]);
+
+  useEffect(() => {
+    if (savedMovies){
+      setRenderMovies(savedMovies);
+    }
+  }, [savedMovies]);
 
   return (
     <section className="movies">
@@ -102,20 +106,15 @@ function SavedMovies({ savedMovies, setSavedMovies, onCardDelete }) {
         isShortFilms={isShortFilms}
         setIsShortFilms={setIsShortFilms}
       />
-      {isLoading ? (
-        <div className="movies__container">
-          <Preloader />
-        </div>
-      ) : (
         <div className="movies__container">
           <MoviesCardList
             movies={renderMovies}
+            savedMovies={savedMovies}
             isMoviesNotFound={isMoviesNotFound}
             isSearchError={isSearchError}
             onCardDelete={onCardDelete}
           />
         </div>
-      )}
     </section>
   );
 }

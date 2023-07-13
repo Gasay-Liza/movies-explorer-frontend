@@ -6,7 +6,7 @@ import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 import Preloader from "../Preloader/Preloader";
 import beatfilmMoviesApi from "../../utils/moviesApi";
 
-function Movies({ onCardSave }) {
+function Movies({ savedMovies, onCardSave, onCardDelete, }) {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов
@@ -18,7 +18,6 @@ function Movies({ onCardSave }) {
   const [isSearchError, setSearchError] = useState(false);
   const [moreCards, setMoreCards] = useState(0); // Число карточек кнопки еще
   const [renderCards, setRenderCards] = useState(null); // Число карточек кнопки еще
-  const [isSaved, setIsSaved] = useState(false); // Сохранение карточки
   const savedFoundMovies = JSON.parse(localStorage.getItem("foundMovies"));
   const savedSearchName = localStorage.getItem("searchName") ?? "";
   const savedStateCheckbox =
@@ -163,9 +162,11 @@ function Movies({ onCardSave }) {
         <div className="movies__container">
           <MoviesCardList
             movies={renderMovies}
+            savedMovies={savedMovies}
             isMoviesNotFound={isMoviesNotFound}
             isSearchError={isSearchError}
             onCardSave={onCardSave}
+            onCardDelete={onCardDelete}
           />
           {foundMovies && renderCards < foundMovies.length && (
             <MoreFilmsButton onClick={handleMoreCards} />

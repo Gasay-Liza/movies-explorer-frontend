@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { MOVIES_API_URL } from "../../utils/constans";
 
@@ -23,20 +23,18 @@ function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = React.useState({});
   const currentLocation = useLocation().pathname;
-
-  const headerActive = checkPath(headerPaths, currentLocation);
-  const footerActive = checkPath(footerPaths, currentLocation);
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
   const [isLoading, setIsLoading] = useState(false);
+  const headerActive = checkPath(headerPaths, currentLocation);
+  const footerActive = checkPath(footerPaths, currentLocation);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [textServerError, setTextServerError] = React.useState("");
+  const [textServerError, setTextServerError] = useState("");
 
   // Регистрация
   async function handleRegister({ name, email, password }) {
     setIsLoading(true);
     try {
       const data = await mainApi.register({ name, email, password });
-      console.log(data);
       if (data.message) {
         handleLogin({ email, password });
         navigate("/movies", { replace: true });
@@ -54,10 +52,8 @@ function App() {
     setIsLoading(true);
     try {
       const data = await mainApi.authorize({ email, password });
-      console.log(data);
       if (data.message) {
         setLoggedIn(true);
-        localStorage.setItem("authorized", "true");
         navigate("/movies", { replace: true });
       }
     } catch (err) {
@@ -99,7 +95,7 @@ function App() {
   // Сохранение карточки
   async function handleSaveMovieCard(movie) {
     try {
-      const newCard = await mainApi.createMovieCard({
+      const newMovieCard = await mainApi.createMovieCard({
         country: movie.country,
         director: movie.director,
         duration: movie.duration,
@@ -112,26 +108,37 @@ function App() {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       });
-      if (newCard) {
-        setSavedMovies([newCard, ...savedMovies]);
+      if (newMovieCard) {
+        setSavedMovies([newMovieCard, ...savedMovies]);
       }
     } catch (err) {
       console.error(err);
     }
   }
 
+  // Получение сохраненных карточек юзера
+  const cbGetSavedCards = useCallback(async () => {
+    try {
+      const data = await mainApi.getSavedMovies();
+      if (data) {
+        setSavedMovies(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, []);
+
   // Удаление карточки
   async function handleDeleteMovieCard(movie) {
+    const deletedCard = savedMovies.find((savedMovie) => {
+      return savedMovie.movieId === (movie.movieId || movie.id);
+    });
     try {
-      const data = await mainApi.deleteCard(savedMovies._id);
+      const data = await mainApi.deleteMovieCard(deletedCard._id);
       if (data) {
-        setSavedMovies((prev) =>
-          prev.map((card) => {
-            if (card.movieId === movie.id) {
-              return card;
-            }
-          })
-        );
+        setSavedMovies((prev) => {
+          return prev.filter((movie) => movie._id !== deletedCard._id);
+          });
       }
     } catch (err) {
       console.error(err);
@@ -140,21 +147,33 @@ function App() {
 
   const cbLogOut = useCallback(async () => {
     try {
-      await mainApi.signout();
-      setLoggedIn(false);
-      navigate("/signin", { replace: true });
+      const data = await mainApi.signout();
+      if (data) {
+        localStorage.clear();
+        setLoggedIn(false);
+        setCurrentUser({});
+        setSavedMovies([]);
+        navigate("/signin", { replace: true });
+      }
     } catch (err) {
       console.error(err);
     }
   }, []);
 
   //При загрузке страницы получаем данные токена юзера
-  React.useEffect(() => {
+  useEffect(() => {
     cbTokenCheck();
   }, []);
 
+  //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера
+  useEffect(() => {
+    if (loggedIn) {
+      cbGetSavedCards();
+    }
+  }, [loggedIn]);
+
   //При загрузке страницы и успешной авторизации получаем данные профиля
-  React.useEffect(() => {
+  useEffect(() => {
     if (!loggedIn) return;
     mainApi
       .checkToken()
@@ -175,7 +194,13 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route
               path="/movies"
-              element={<Movies onCardSave={handleSaveMovieCard} />}
+              element={
+                <Movies
+                  savedMovies={savedMovies}
+                  onCardSave={handleSaveMovieCard}
+                  onCardDelete={handleDeleteMovieCard}
+                />
+              }
             />
             <Route
               path="/saved-movies"
