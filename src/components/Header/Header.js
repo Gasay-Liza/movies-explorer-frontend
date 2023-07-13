@@ -12,7 +12,10 @@ function Header(props) {
   function handleBurgerBtnClick() {
      setBurgerMenuActive(!burgerMenuActive);
   }
-
+  function handleCloseMenu(){
+    setBurgerMenuActive(false);
+  }
+  
   const isMain = useLocation().pathname === "/";
   return (
     <header
@@ -33,7 +36,7 @@ function Header(props) {
           />
         </div>
       )}
-      <Overlay isActive={burgerMenuActive} />
+      <Overlay isActive={burgerMenuActive} onClose={handleCloseMenu}/>
     </header>
   );
 }

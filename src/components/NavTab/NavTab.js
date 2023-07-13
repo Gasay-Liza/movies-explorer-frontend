@@ -3,7 +3,7 @@ import "./NavTab.css";
 import { NavLink, useLocation} from "react-router-dom";
 
 
-function NavTab({ isburgerMenuActive }) {
+function NavTab({ isburgerMenuActive}) {
   const currentPath = useLocation().pathname;
   return (
     <nav className={`navtab ${isburgerMenuActive ? "navtab__active" : ""}`}>
