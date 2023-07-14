@@ -17,7 +17,7 @@ import "./App.css";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/mainApi";
-import moviesApi from "../../utils/moviesApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function App() {
     setIsLoading(true);
     try {
       const data = await mainApi.register({ name, email, password });
-      if (data.message) {
+      if (data) {
         handleLogin({ email, password });
         navigate("/movies", { replace: true });
       }
@@ -69,7 +69,7 @@ function App() {
     setIsLoading(true);
     try {
       const data = await mainApi.updateUser({ name, email });
-      if (data.message) {
+      if (data) {
         setCurrentUser({ name, email });
       }
     } catch (err) {
@@ -160,17 +160,17 @@ function App() {
     }
   }, []);
 
-  //При загрузке страницы получаем данные токена юзера
-  useEffect(() => {
-    cbTokenCheck();
-  }, []);
+  // //При загрузке страницы получаем данные токена юзера
+  // useEffect(() => {
+  //   cbTokenCheck();
+  // }, []);
 
-  //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера
-  useEffect(() => {
-    if (loggedIn) {
-      cbGetSavedCards();
-    }
-  }, [loggedIn]);
+  // //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //     cbGetSavedCards();
+  //   }
+  // }, [loggedIn]);
 
   //При загрузке страницы и успешной авторизации получаем данные профиля
   useEffect(() => {
@@ -179,6 +179,7 @@ function App() {
       .checkToken()
       .then((data) => {
         setCurrentUser(data);
+        cbGetSavedCards();
       })
       .catch((err) => {
         console.error(err);
@@ -195,20 +196,24 @@ function App() {
             <Route
               path="/movies"
               element={
-                <Movies
+                <ProtectedRoute
+                  element={Movies}
                   savedMovies={savedMovies}
                   onCardSave={handleSaveMovieCard}
                   onCardDelete={handleDeleteMovieCard}
+                  loggedIn={loggedIn}
                 />
               }
             />
             <Route
               path="/saved-movies"
               element={
-                <SavedMovies
+                <ProtectedRoute
+                  element={SavedMovies}
                   savedMovies={savedMovies}
                   setSavedMovies={setSavedMovies}
                   onCardDelete={handleDeleteMovieCard}
+                  loggedIn={loggedIn}
                 />
               }
             />
@@ -217,6 +222,7 @@ function App() {
               element={
                 <Register
                   onRegister={handleRegister}
+                  loggedIn={loggedIn}
                   isLoading={isLoading}
                   textServerError={textServerError}
                   setTextServerError={setTextServerError}
@@ -228,7 +234,7 @@ function App() {
               element={
                 <Login
                   onLogin={handleLogin}
-                  isLoggedIn={loggedIn}
+                  loggedIn={loggedIn}
                   isLoading={isLoading}
                   textServerError={textServerError}
                   setTextServerError={setTextServerError}
@@ -238,12 +244,14 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
+                <ProtectedRoute 
+                  element={Profile}
                   onUpdateUser={handleUpdateUser}
                   onLogOut={cbLogOut}
                   isLoading={isLoading}
                   textServerError={textServerError}
                   setTextServerError={setTextServerError}
+                  loggedIn={loggedIn}
                 />
               }
             />

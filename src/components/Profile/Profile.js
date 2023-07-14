@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useValidation";
 import "./Profile.css";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import {NAME_REG_EXP} from '../../utils/constans';
+
 
 function Profile({ onUpdateUser, onLogOut, isLoading, textServerError, setTextServerError}) {
   const [isEditProfile, setIsEditProfile] = useState(false);
   const currentUser = useContext(CurrentUserContext);
-  const {navigate, values, errors, handleChange, resetValidation, isValid, } = useValidation();
+  const {values, errors, handleChange, resetValidation, isValid, } = useValidation();
 
   const handleSubmit = useCallback(
     (e) => {
@@ -45,6 +47,7 @@ function Profile({ onUpdateUser, onLogOut, isLoading, textServerError, setTextSe
               className="profile__input"
               id="name"
               name="name"
+              pattern={NAME_REG_EXP}
               placeholder=""
               value={values.name || ''}
               onChange={handleChange}

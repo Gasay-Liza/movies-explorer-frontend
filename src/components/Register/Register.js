@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect} from 'react';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from '../../hooks/useValidation';
-function Register({isLoading, onRegister, isLoggedIn, textServerError, setTextServerError}) {
+import {NAME_REG_EXP} from '../../utils/constans';
+function Register({isLoading, onRegister, loggedIn, textServerError, setTextServerError}) {
 const {values, errors, handleChange, isValid, resetValidation} = useValidation();
 
   const handleSubmit = useCallback((e) => {
@@ -10,13 +11,19 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
       onRegister(values);
   },[values, onRegister])
   
+  //Резет валидации ошибок инпутов
+  useEffect(() => {
+    resetValidation();
+  }, [resetValidation]);
 
   //Резет валидации ошибки сервера
   useEffect(() => {
     setTextServerError("");
   }, [setTextServerError]);
 
-  return (
+  return loggedIn ? (
+    <Navigate to="/movies" replace />
+  ) : (
     <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth
         isLoading={isLoading}
@@ -42,6 +49,7 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
               id="name"
               type="text"
               name="name"
+              pattern={NAME_REG_EXP}
               onChange={handleChange}
               value={values.name  || ''}
               minLength="2"

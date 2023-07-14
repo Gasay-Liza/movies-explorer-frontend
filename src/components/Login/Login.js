@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Auth from "../Auth/Auth";
 import useValidation from "../../hooks/useValidation";
-import { PATTERN_EMAIL } from "../../utils/constans";
 
 function Login({
   onLogin,
-  isLoggedIn,
+  loggedIn,
   isLoading,
   textServerError,
   setTextServerError,
@@ -27,7 +26,10 @@ function Login({
     setTextServerError("");
   }, [setTextServerError]);
 
-  return (
+
+  return loggedIn ? (
+    <Navigate to="/movies" replace />
+  ) : (
     <div className="page page__wrapper" aria-label="Cтраница авторизации">
       <Auth
         isLoading={isLoading}
