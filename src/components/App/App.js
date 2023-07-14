@@ -9,7 +9,6 @@ import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import Profile from "../Profile/Profile";
 import PageNotFound from "../PageNotFound/PageNotFound";
-// import MoviesCard from "../MoviesCard/MoviesCard";
 import Footer from "../Footer/Footer";
 import { headerPaths, footerPaths } from "../../utils/constans";
 import { checkPath } from "../../utils/utils";
