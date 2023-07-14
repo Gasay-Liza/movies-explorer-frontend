@@ -1,5 +1,4 @@
 import "./Portfolio.css";
-import myPhoto from "../../images/my-photo.jpg";
 import arrowIcon from "../../images/arrow-icon.svg";
 
 function Portfolio(props) {
@@ -15,7 +14,7 @@ function Portfolio(props) {
             className="portfolio__link page__link"
           >
             <p className="portfolio__text">Статичный сайт</p>
-            <img className="portfolio__icon" src={arrowIcon} />
+            <img className="portfolio__icon" src={arrowIcon} alt="Иконка стрелки"/>
           </a>
         </li>
 
@@ -27,7 +26,7 @@ function Portfolio(props) {
             className="portfolio__link page__link"
           >
             <p className="portfolio__text">Адаптивный сайт</p>
-            <img className="portfolio__icon" src={arrowIcon} />
+            <img className="portfolio__icon" src={arrowIcon} alt="Иконка стрелки"/>
           </a>
         </li>
 

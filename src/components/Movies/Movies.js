@@ -27,15 +27,12 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
   function submitSearch(e) {
     e.preventDefault();
     const filter = filterBySearch(isShortFilms);
-    console.log("filter", filter);
     setFoundMovies(filter);
     if (filter.length !== 0) {
       setIsMoviesNotFound(false);
     } else {
       setIsMoviesNotFound(true);
     }
-    console.log("foundMovies", foundMovies);
-    console.log("moviesNotFound", isMoviesNotFound);
   }
 
   // При вводе в форму

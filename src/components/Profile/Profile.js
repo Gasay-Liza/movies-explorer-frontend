@@ -1,5 +1,4 @@
 import React, { useCallback, useContext, useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import useValidation from "../../hooks/useValidation";
 import "./Profile.css";
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";

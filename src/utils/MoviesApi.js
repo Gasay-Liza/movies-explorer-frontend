@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
 import { MOVIES_API_URL } from "./constans";
-
 
 class MoviesApi {
   constructor({ baseUrl, headers, credentials }) {

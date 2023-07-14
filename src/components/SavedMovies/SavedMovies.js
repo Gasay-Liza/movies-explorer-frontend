@@ -2,8 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import "../Movies/Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import Preloader from "../Preloader/Preloader";
-import mainApi from "../../utils/mainApi";
 
 function SavedMovies({ savedMovies,  onCardDelete }) {
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
@@ -67,21 +65,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
     [savedMovies, searchName]
   );
 
-  // // При перезагрузке страницы загружаем данные с сервера
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   mainApi
-  //     .getSavedMovies()
-  //     .then((movies) => {
-  //       setSavedMovies(movies); // Сохраняем в стейт
-  //       setRenderMovies(movies);
-  //       console.log(movies);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     })
-  //     .finally(() => setIsLoading(false));
-  // }, []);
 
   useEffect(() => {
     if (foundMovies) {
