@@ -30,6 +30,7 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
     setFoundMovies(filter);
     if (filter.length !== 0) {
       setIsMoviesNotFound(false);
+
     } else {
       setIsMoviesNotFound(true);
     }
@@ -61,11 +62,15 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
       let updatedList = [...allMovies]; // Сделаем копию списка фильмов
       updatedList = updatedList.filter((movie) => {
         return (
+          
           (isChecked ? movie.duration <= 40 : movie) &&
           (movie.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
             movie.nameEN.toLowerCase().includes(searchName.toLowerCase())) // Проверка в EN имени
         );
       });
+      console.log('searchName',searchName)
+      console.log(updatedList)
+      
       return updatedList;
     },
     [allMovies, searchName]
@@ -121,6 +126,7 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
     localStorage.setItem("searchName", searchName);
     localStorage.setItem("stateCheckbox", JSON.stringify(isShortFilms));
   }, [isShortFilms, foundMovies]);
+
 
   // Отслеживаю ширину окна
   function handleResize() {

@@ -81,10 +81,13 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
+      console.log(loggedIn)
       const userData = await mainApi.checkToken();
       if (userData) {
         setCurrentUser(userData);
         setLoggedIn(true);
+        console.log("loggedIn", loggedIn)
+        console.log("userData", userData)
       }
     } catch (err) {
       console.error(err);
@@ -159,31 +162,19 @@ function App() {
     }
   }, []);
 
-  // //При загрузке страницы получаем данные токена юзера
-  // useEffect(() => {
-  //   cbTokenCheck();
-  // }, []);
-
-  // //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     cbGetSavedCards();
-  //   }
-  // }, [loggedIn]);
-
-  //При загрузке страницы и успешной авторизации получаем данные профиля
+  //При загрузке страницы получаем данные токена юзера
   useEffect(() => {
-    if (!loggedIn) return;
-    mainApi
-      .checkToken()
-      .then((data) => {
-        setCurrentUser(data);
-        cbGetSavedCards();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [loggedIn]);
+    cbTokenCheck();
+  }, [loggedIn, cbTokenCheck]);
+
+  //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера 
+  //Редирект
+  useEffect(() => {
+    if (loggedIn) {
+      cbGetSavedCards();
+      navigate('/movies', { replace: true })
+    }
+  }, [loggedIn, cbGetSavedCards]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

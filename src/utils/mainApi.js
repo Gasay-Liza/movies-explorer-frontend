@@ -74,7 +74,7 @@ class MainApi {
     });
   };
 
-  // Получение данных профиля с сервера
+  // Апдейт данных профиля
   updateUser = ({email, name}) => {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
