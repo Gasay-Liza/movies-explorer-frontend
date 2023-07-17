@@ -13,8 +13,10 @@ https://github.com/Gasay-Liza/movies-explorer-api
 
 ## Ссылки на проект
 Backend https://api.gasay-movies-explorer.nomoredomains.rocks
+
 Frontend and backend https://gasay-movies-explorer.nomoredomains.xyz/
 
+Pull request https://github.com/Gasay-Liza/movies-explorer-frontend/pull/2
 ## Структура и функционал
 
 Сайт состоит из нескольких страниц:
