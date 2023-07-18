@@ -21,6 +21,7 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
     setTextServerError("");
   }, [setTextServerError]);
 
+  
   return loggedIn ? (
     <Navigate to="/movies" replace />
   ) : (

@@ -9,7 +9,9 @@ function Profile({ onUpdateUser, onLogOut, isLoading, textServerError, setTextSe
   const [isEditProfile, setIsEditProfile] = useState(false);
   const currentUser = useContext(CurrentUserContext);
   const {values, errors, handleChange, resetValidation, isValid, } = useValidation();
-
+  const [isCurrentUser, setIsCurrentUser] = useState(true);
+  
+  
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -17,6 +19,13 @@ function Profile({ onUpdateUser, onLogOut, isLoading, textServerError, setTextSe
     },
     [values, onUpdateUser]
   );
+  
+  //Сравнение данных по сравнению с текущими данными пользователя
+  useEffect(() => {
+    currentUser.name !== values.name || currentUser.email !== values.email
+      ? setIsCurrentUser(false)
+      : setIsCurrentUser(true);
+  }, [currentUser, values]);
 
   //Резет валидации ошибок инпутов
   useEffect(() => {
@@ -79,7 +88,7 @@ function Profile({ onUpdateUser, onLogOut, isLoading, textServerError, setTextSe
           <button
             type="submit"
             className="profile__submit page__button"
-            disabled={!isValid}
+            disabled={!isValid && !isCurrentUser}
           >
             {isLoading ? "Сохранение..." : "Сохранить"}
           </button>
