@@ -155,7 +155,7 @@ function App() {
         setLoggedIn(false);
         setCurrentUser({});
         setSavedMovies([]);
-        navigate("/signin", { replace: true });
+        navigate("/", { replace: true });
       }
     } catch (err) {
       console.error(err);
@@ -172,7 +172,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       cbGetSavedCards();
-      navigate('/movies', { replace: true })
+      // navigate('/movies', { replace: true })
     }
   }, [loggedIn, cbGetSavedCards]);
 
