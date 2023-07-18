@@ -6,7 +6,7 @@ import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 import Preloader from "../Preloader/Preloader";
 import beatfilmMoviesApi from "../../utils/moviesApi";
 
-function Movies({ savedMovies, onCardSave, onCardDelete, }) {
+function Movies({ savedMovies, onCardSave, onCardDelete, setSavedMovies }) {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов

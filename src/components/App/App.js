@@ -189,6 +189,7 @@ function App() {
                 <ProtectedRoute
                   element={Movies}
                   savedMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                   onCardSave={handleSaveMovieCard}
                   onCardDelete={handleDeleteMovieCard}
                   loggedIn={loggedIn}

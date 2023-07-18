@@ -17,6 +17,11 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
     const filter = filterBySearch(isShortFilms);
     console.log("filter", filter);
     setFoundMovies(filter);
+    if (searchName === ""){
+      setSearchError("Нужно ввести ключевое слово");
+    } else {
+      setSearchError("");
+    }
     if (filter.length !== 0) {
       setIsMoviesNotFound(false);
     } else {
@@ -74,7 +79,8 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
 
   useEffect(() => {
     if (savedMovies){
-      setRenderMovies(savedMovies);
+      const filter = filterBySearch(isShortFilms);
+      setRenderMovies(filter);
     }
   }, [savedMovies]);
 
@@ -88,13 +94,13 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
         handleToggleCheckbox={handleToggleCheckbox}
         isShortFilms={isShortFilms}
         setIsShortFilms={setIsShortFilms}
+        isSearchError={isSearchError}
       />
         <div className="movies__container">
           <MoviesCardList
             movies={renderMovies}
             savedMovies={savedMovies}
             isMoviesNotFound={isMoviesNotFound}
-            isSearchError={isSearchError}
             onCardDelete={onCardDelete}
           />
         </div>
