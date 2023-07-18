@@ -180,7 +180,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <div className="page__content">
-          {headerActive && <Header />}
+          {headerActive && <Header loggedIn={loggedIn}/>}
           <Routes>
             <Route path="/" element={<Main />} />
             <Route

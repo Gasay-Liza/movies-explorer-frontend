@@ -7,7 +7,7 @@ import BurgerButton from "../BurgerButton/BurgerButton";
 import NavTab from "../NavTab/NavTab";
 import Overlay from "../Overlay/Overlay";
 
-function Header(props) {
+function Header({loggedIn}) {
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
   function handleBurgerBtnClick() {
      setBurgerMenuActive(!burgerMenuActive);
@@ -25,7 +25,7 @@ function Header(props) {
         <img className="header__logo" src={logoPath} alt="Логотип" />
       </Link>
 
-      {isMain ? (
+      {!loggedIn ? (
         <AuthLinks />
       ) : (
         <div className="header__links">
