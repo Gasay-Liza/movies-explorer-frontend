@@ -143,6 +143,20 @@
     color: #EE3465;
 }
 
+.profile__succes-message{
+    margin: 12px 0 12px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    align-items: center;
+    font-size: 11px;
+    line-height: 14px;
+    color: white;
+}
+
 .profile__submit{
     width: 100%;
     max-width: 410px;

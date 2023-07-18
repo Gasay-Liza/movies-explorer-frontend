@@ -28,7 +28,6 @@ function App() {
   const footerActive = checkPath(footerPaths, currentLocation);
   const [loggedIn, setLoggedIn] = useState(false);
   const [textServerError, setTextServerError] = useState("");
-
   // Регистрация
   async function handleRegister({ name, email, password }) {
     setIsLoading(true);
@@ -70,6 +69,7 @@ function App() {
       const data = await mainApi.updateUser({ name, email });
       if (data) {
         setCurrentUser({ name, email });
+        alert("Профиль успешно обновлен")
       }
     } catch (err) {
       setTextServerError(err);
