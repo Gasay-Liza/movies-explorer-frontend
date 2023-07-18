@@ -23,14 +23,18 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
   const savedStateCheckbox =
     JSON.parse(localStorage.getItem("stateCheckbox")) ?? false;
 
-  // При клике на поиск фильма
+  // При сабмите формы поиска фильма
   function submitSearch(e) {
     e.preventDefault();
     const filter = filterBySearch(isShortFilms);
     setFoundMovies(filter);
+    if (searchName === ""){
+      setSearchError("Нужно ввести ключевое слово");
+    } else {
+      setSearchError("");
+    }
     if (filter.length !== 0) {
       setIsMoviesNotFound(false);
-
     } else {
       setIsMoviesNotFound(true);
     }
@@ -152,6 +156,8 @@ function Movies({ savedMovies, onCardSave, onCardDelete, }) {
         onSubmit={submitSearch}
         searchName={searchName}
         setSearchName={setSearchName}
+        setSearchError={setSearchError}
+        isSearchError={isSearchError}
         handleChangeMovieName={handleChangeMovieName}
         handleToggleCheckbox={handleToggleCheckbox}
         isShortFilms={isShortFilms}

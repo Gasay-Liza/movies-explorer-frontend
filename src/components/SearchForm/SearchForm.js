@@ -5,6 +5,8 @@ import FilterCheckbox from "./../FilterCheckbox/FilterCheckbox";
 function SearchForm({
   onSubmit,
   searchName,
+  isSearchError,
+  setSearchError,
   handleToggleCheckbox,
   handleChangeMovieName,
   setIsShortFilms,
@@ -16,7 +18,7 @@ function SearchForm({
       className="search-form page__section"
       aria-label="Форма поиска фильмов"
     >
-      <form className="search-form__container" onSubmit={onSubmit}>
+      <form className="search-form__container" onSubmit={onSubmit} noValidate>
         <input
           className="search-form__bar"
           type="search"
@@ -32,6 +34,7 @@ function SearchForm({
           className="search-form__btn page__button"
         ></button>
       </form>
+      <span className="search-form__error">{isSearchError}</span>
       
       <div className="search-form__line">
         <FilterCheckbox
