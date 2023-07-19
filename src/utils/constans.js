@@ -1,7 +1,7 @@
 export const headerPaths = ["/", "/movies", "/saved-movies", "/profile"];
 export const footerPaths = ["/", "/movies", "/saved-movies"];
 export const MOVIES_API_URL = "https://api.nomoreparties.co";
-export const MAIN_API_URL = "https://gasay-movies-explorer.nomoredomains.xyz";
+export const MAIN_API_URL = "https://api.gasay-movies-explorer.nomoredomains.rocks";
 export const NAME_REG_EXP = "^[A-Za-zА-Яа-яЁё\\-\\s]+$"
 export const NUMBER_OF_CARDS_XL = 12;
 export const NUMBER_OF_CARDS_L = 8;
