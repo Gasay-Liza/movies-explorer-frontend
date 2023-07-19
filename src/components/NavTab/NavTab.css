@@ -83,7 +83,7 @@ nav-container__overlay
 .navtab__profile-icon{
     width: 26px;
     height: 30px;
-    background: #313131;
+    background: inherit;
     border-radius: 4px;
     background-image: url(../../images/profile-icon.svg);
     background-position: 50% 50%;

@@ -21,9 +21,9 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
     setTextServerError("");
   }, [setTextServerError]);
 
-  
+
   return loggedIn ? (
-    <Navigate to="/movies" replace />
+    <Navigate to="/" replace />
   ) : (
     <div className="page page__wrapper" aria-label="Cтраница регистрации">
       <Auth

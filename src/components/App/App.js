@@ -17,12 +17,14 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/mainApi";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = React.useState({});
   const currentLocation = useLocation().pathname;
   const [savedMovies, setSavedMovies] = useState([]); // Сохраненные фильмы
+  const [isTokenChecked, setIsTokenChecked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const headerActive = checkPath(headerPaths, currentLocation);
   const footerActive = checkPath(footerPaths, currentLocation);
@@ -69,7 +71,7 @@ function App() {
       const data = await mainApi.updateUser({ name, email });
       if (data) {
         setCurrentUser({ name, email });
-        alert("Профиль успешно обновлен")
+        alert("Профиль успешно обновлен");
       }
     } catch (err) {
       setTextServerError(err);
@@ -81,16 +83,15 @@ function App() {
 
   const cbTokenCheck = useCallback(async () => {
     try {
-      console.log(loggedIn)
       const userData = await mainApi.checkToken();
       if (userData) {
-        setCurrentUser(userData);
         setLoggedIn(true);
-        console.log("loggedIn", loggedIn)
-        console.log("userData", userData)
+        setCurrentUser(userData);
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsTokenChecked(true);
     }
   }, []);
 
@@ -140,7 +141,7 @@ function App() {
       if (data) {
         setSavedMovies((prev) => {
           return prev.filter((movie) => movie._id !== deletedCard._id);
-          });
+        });
       }
     } catch (err) {
       console.error(err);
@@ -167,91 +168,93 @@ function App() {
     cbTokenCheck();
   }, [loggedIn, cbTokenCheck]);
 
-  //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера 
-  //Редирект
+  //При загрузке страницы и успешной авторизации получаем сохраненные фильмы юзера
   useEffect(() => {
     if (loggedIn) {
       cbGetSavedCards();
-      // navigate('/movies', { replace: true })
     }
   }, [loggedIn, cbGetSavedCards]);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__content">
-          {headerActive && <Header loggedIn={loggedIn}/>}
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route
-              path="/movies"
-              element={
-                <ProtectedRoute
-                  element={Movies}
-                  savedMovies={savedMovies}
-                  setSavedMovies={setSavedMovies}
-                  onCardSave={handleSaveMovieCard}
-                  onCardDelete={handleDeleteMovieCard}
-                  loggedIn={loggedIn}
-                />
-              }
-            />
-            <Route
-              path="/saved-movies"
-              element={
-                <ProtectedRoute
-                  element={SavedMovies}
-                  savedMovies={savedMovies}
-                  setSavedMovies={setSavedMovies}
-                  onCardDelete={handleDeleteMovieCard}
-                  loggedIn={loggedIn}
-                />
-              }
-            />
-            <Route
-              path="/signup"
-              element={
-                <Register
-                  onRegister={handleRegister}
-                  loggedIn={loggedIn}
-                  isLoading={isLoading}
-                  textServerError={textServerError}
-                  setTextServerError={setTextServerError}
-                />
-              }
-            />
-            <Route
-              path="/signin"
-              element={
-                <Login
-                  onLogin={handleLogin}
-                  loggedIn={loggedIn}
-                  isLoading={isLoading}
-                  textServerError={textServerError}
-                  setTextServerError={setTextServerError}
-                />
-              }
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute 
-                  element={Profile}
-                  onUpdateUser={handleUpdateUser}
-                  onLogOut={cbLogOut}
-                  isLoading={isLoading}
-                  textServerError={textServerError}
-                  setTextServerError={setTextServerError}
-                  loggedIn={loggedIn}
-                />
-              }
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          {footerActive && <Footer />}
-        </div>
+    <div className="page">
+      <div className="page__content">
+        {!isTokenChecked ? (
+          <Preloader />
+        ) : (
+          <CurrentUserContext.Provider value={currentUser}>
+            {headerActive && <Header loggedIn={loggedIn} />}
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route
+                path="/movies"
+                element={
+                  <ProtectedRoute
+                    element={Movies}
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
+                    onCardSave={handleSaveMovieCard}
+                    onCardDelete={handleDeleteMovieCard}
+                    loggedIn={loggedIn}
+                  />
+                }
+              />
+              <Route
+                path="/saved-movies"
+                element={
+                  <ProtectedRoute
+                    element={SavedMovies}
+                    savedMovies={savedMovies}
+                    setSavedMovies={setSavedMovies}
+                    onCardDelete={handleDeleteMovieCard}
+                    loggedIn={loggedIn}
+                  />
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <Register
+                    onRegister={handleRegister}
+                    loggedIn={loggedIn}
+                    isLoading={isLoading}
+                    textServerError={textServerError}
+                    setTextServerError={setTextServerError}
+                  />
+                }
+              />
+              <Route
+                path="/signin"
+                element={
+                  <Login
+                    onLogin={handleLogin}
+                    loggedIn={loggedIn}
+                    isLoading={isLoading}
+                    textServerError={textServerError}
+                    setTextServerError={setTextServerError}
+                  />
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute
+                    element={Profile}
+                    onUpdateUser={handleUpdateUser}
+                    onLogOut={cbLogOut}
+                    isLoading={isLoading}
+                    textServerError={textServerError}
+                    setTextServerError={setTextServerError}
+                    loggedIn={loggedIn}
+                  />
+                }
+              />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+            {footerActive && <Footer />}
+          </CurrentUserContext.Provider>
+        )}
       </div>
-    </CurrentUserContext.Provider>
+    </div>
   );
 }
 

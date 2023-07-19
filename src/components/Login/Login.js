@@ -28,7 +28,7 @@ function Login({
 
 
   return loggedIn ? (
-    <Navigate to="/movies" replace />
+    <Navigate to="/" replace />
   ) : (
     <div className="page page__wrapper" aria-label="Cтраница авторизации">
       <Auth
