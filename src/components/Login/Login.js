@@ -62,6 +62,7 @@ function Login({
               maxLength="30"
               onChange={handleChange}
               value={values.email || ""}
+              disabled={isLoading}
               required
             />
             <span className="auth__error">{errors.email || ""}</span>
@@ -81,6 +82,7 @@ function Login({
               maxLength="30"
               onChange={handleChange}
               value={values.password || ""}
+              disabled={isLoading}
               required
             />
             <span className="auth__error">{errors.password || ""}</span>

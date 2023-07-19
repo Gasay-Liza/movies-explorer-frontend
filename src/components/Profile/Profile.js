@@ -64,7 +64,7 @@ function Profile({
               placeholder=""
               value={values.name || ""}
               onChange={handleChange}
-              disabled={!isEditProfile}
+              disabled={!isEditProfile || isLoading}
               required
             />
           </div>
@@ -80,7 +80,7 @@ function Profile({
               placeholder=""
               value={values.email || ""}
               onChange={handleChange}
-              disabled={!isEditProfile}
+              disabled={!isEditProfile || isLoading}
               required
             />
           </div>
@@ -104,6 +104,7 @@ function Profile({
               type="submit"
               className="profile__button button button_type_edit-profile page__button"
               onClick={handleEditProfileClick}
+              disabled={isLoading}
             >
               Редактировать
             </button>

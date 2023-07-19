@@ -15,7 +15,7 @@ function Auth({ title, buttonText, hint, children, handleSubmit, isValid, textSe
         <form className="auth__form" onSubmit={handleSubmit}>
           {children}
           <span className={`auth__error auth__server-error ${(isValid || isLoading) ? "" : "auth__server-error__active"}`}>{textServerError}</span>
-          <button type="submit" className="auth__btn page__button" disabled={!isValid}>
+          <button type="submit" className="auth__btn page__button" disabled={!isValid || isLoading}>
             {buttonText}
           </button>
         </form>

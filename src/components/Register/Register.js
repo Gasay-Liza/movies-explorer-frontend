@@ -68,6 +68,7 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
               type="email"
               onChange={handleChange}
               value={values.email || ''}
+              disabled={isLoading}
               required
             />
             <span className="auth__error">{errors.email || ''}</span>
@@ -83,6 +84,7 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
               onChange={handleChange}
               value={values.password || ''} 
               minLength="8"
+              disabled={isLoading}
               required
             />
             <span className="auth__error">{errors.password || ''}</span>
