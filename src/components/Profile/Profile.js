@@ -30,7 +30,6 @@ function Profile({
     currentUser.name !== values.name || currentUser.email !== values.email
       ? setIsCurrentUser(false)
       : setIsCurrentUser(true);
-      console.log(isCurrentUser)
   }, [currentUser, values]);
 
   //Резет валидации ошибок инпутов
@@ -110,7 +109,6 @@ function Profile({
             </button>
 
             <button
-              to="/"
               className="profile__button button button_type_logout page__button"
               onClick={onLogOut}
             >

@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "./Header.css";
 import logoPath from "../../images/header-logo.svg";
@@ -7,15 +7,15 @@ import BurgerButton from "../BurgerButton/BurgerButton";
 import NavTab from "../NavTab/NavTab";
 import Overlay from "../Overlay/Overlay";
 
-function Header({loggedIn}) {
+function Header({ loggedIn }) {
   const [burgerMenuActive, setBurgerMenuActive] = useState(false);
   function handleBurgerBtnClick() {
-     setBurgerMenuActive(!burgerMenuActive);
+    setBurgerMenuActive(!burgerMenuActive);
   }
-  function handleCloseMenu(){
+  function handleCloseMenu() {
     setBurgerMenuActive(false);
   }
-  
+
   const isMain = useLocation().pathname === "/";
   return (
     <header
@@ -29,14 +29,17 @@ function Header({loggedIn}) {
         <AuthLinks />
       ) : (
         <div className="header__links">
-          <NavTab isburgerMenuActive={burgerMenuActive} />
+          <NavTab
+            isburgerMenuActive={burgerMenuActive}
+            onClose={handleCloseMenu}
+          />
           <BurgerButton
             onClick={handleBurgerBtnClick}
             isMenuActive={burgerMenuActive}
           />
         </div>
       )}
-      <Overlay isActive={burgerMenuActive} onClose={handleCloseMenu}/>
+      <Overlay isActive={burgerMenuActive} onClose={handleCloseMenu} />
     </header>
   );
 }
