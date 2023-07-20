@@ -16,7 +16,7 @@ function Profile({
   const { values, errors, handleChange, resetValidation, isValid } =
     useValidation();
   const [isCurrentUser, setIsCurrentUser] = useState(true);
-  
+
   // Изменение данных профиля
   function handleSubmit(e) {
     e.preventDefault();
@@ -91,7 +91,7 @@ function Profile({
         </fieldset>
         {isEditProfile ? (
           <>
-              <span className="profile__server-error">{textServerError}</span>
+            <span className="profile__server-error">{textServerError}</span>
             <button
               type="submit"
               className="profile__submit page__button"

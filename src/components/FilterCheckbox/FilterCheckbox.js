@@ -1,6 +1,10 @@
 import "./FilterCheckbox.css";
 
-function FilterCheckbox({ isShortFilms, setIsShortFilms, handleToggleCheckbox}) {
+function FilterCheckbox({
+  isShortFilms,
+  setIsShortFilms,
+  handleToggleCheckbox,
+}) {
   return (
     <label htmlFor="checkbox" className="filter-checkbox">
       <input
@@ -10,12 +14,11 @@ function FilterCheckbox({ isShortFilms, setIsShortFilms, handleToggleCheckbox}) 
         checked={isShortFilms}
         onChange={(e) => handleToggleCheckbox(e.target.checked)}
       />
-      
+
       <span className="filter-checkbox__custom"></span>
       <span className="filter-checkbox__title">Короткометражки</span>
     </label>
   );
 }
-
 
 export default FilterCheckbox;

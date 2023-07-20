@@ -10,8 +10,7 @@ function Login({
   textServerError,
   setTextServerError,
 }) {
-  const { values, errors, handleChange,  isValid } =
-    useValidation();
+  const { values, errors, handleChange, isValid } = useValidation();
 
   const handleSubmit = useCallback(
     (e) => {
@@ -25,7 +24,6 @@ function Login({
   useEffect(() => {
     setTextServerError("");
   }, [setTextServerError]);
-
 
   return loggedIn ? (
     <Navigate to="/" replace />

@@ -1,17 +1,17 @@
 //хук управления формой и валидации формы
-import { useState, useCallback  } from "react";
-import { useNavigate} from "react-router-dom";
+import { useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import isEmail from "validator/es/lib/isEmail";
 
-export default function useValidation(){
-const navigate = useNavigate();
+export default function useValidation() {
+  const navigate = useNavigate();
 
-const [values, setValues] = useState({})
-const [errors, setErrors] = useState({})
-const [isValid, setIsValid] = useState(false)
+  const [values, setValues] = useState({});
+  const [errors, setErrors] = useState({});
+  const [isValid, setIsValid] = useState(false);
 
-const handleChange = (e) => {
-    const {name, value} = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     if (name === "name" && e.target.validity.patternMismatch) {
       e.target.setCustomValidity(
         "Поле &laquo;Имя&raquo; должно содержать только латиницу, кириллицу, пробел или дефис"
@@ -23,13 +23,12 @@ const handleChange = (e) => {
     } else {
       e.target.setCustomValidity("");
     }
-    setValues((values) => ({...values,[name]: value}));
-    setErrors((errors) => ({...errors,[name]: e.target.validationMessage
-  }));
-  setIsValid(e.target.closest("form").checkValidity());
-}
+    setValues((values) => ({ ...values, [name]: value }));
+    setErrors((errors) => ({ ...errors, [name]: e.target.validationMessage }));
+    setIsValid(e.target.closest("form").checkValidity());
+  };
 
-  const resetValidation= useCallback(
+  const resetValidation = useCallback(
     (newValues = {}, newErrors = {}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
@@ -38,5 +37,5 @@ const handleChange = (e) => {
     [setValues, setErrors, setIsValid]
   );
 
-return {navigate, values, errors, handleChange, resetValidation, isValid};
-};
+  return { navigate, values, errors, handleChange, resetValidation, isValid };
+}
