@@ -16,14 +16,18 @@ function Profile({
   const { values, errors, handleChange, resetValidation, isValid } =
     useValidation();
   const [isCurrentUser, setIsCurrentUser] = useState(true);
+  
+  // Изменение данных профиля
+  function handleSubmit(e) {
+    e.preventDefault();
+    onUpdateUser(values);
+  }
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      onUpdateUser(values);
-    },
-    [values, onUpdateUser]
-  );
+  // Выход из профиля
+  function handleLogout(e) {
+    e.preventDefault();
+    onLogOut(values);
+  }
 
   //Сравнение данных по сравнению с текущими данными пользователя
   useEffect(() => {
@@ -88,7 +92,6 @@ function Profile({
         {isEditProfile ? (
           <>
               <span className="profile__server-error">{textServerError}</span>
-              {/* <span className="profile__succes-message">{succesMessage}</span> */}
             <button
               type="submit"
               className="profile__submit page__button"
@@ -110,7 +113,7 @@ function Profile({
 
             <button
               className="profile__button button button_type_logout page__button"
-              onClick={onLogOut}
+              onClick={handleLogout}
             >
               Выйти из аккаунта
             </button>

@@ -71,6 +71,7 @@ function App() {
       const data = await mainApi.updateUser({ name, email });
       if (data) {
         setCurrentUser({ name, email });
+        setTextServerError('');
         alert("Профиль успешно обновлен");
       }
     } catch (err) {
