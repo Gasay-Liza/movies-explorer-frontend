@@ -24,7 +24,6 @@ class MainApi {
     return fetch(url, options).then(this._checkResponse);
   }
 
-
   // Авторизация
   authorize({ email, password }) {
     return this._request(`${this._baseUrl}/signin`, {
@@ -37,7 +36,6 @@ class MainApi {
       }),
     });
   }
-
 
   //Регистрация
   register = ({ name, email, password }) => {
@@ -53,8 +51,6 @@ class MainApi {
     });
   };
 
-
-
   //Выход из аккаунта
   signout = () => {
     return this._request(`${this._baseUrl}/signout`, {
@@ -63,7 +59,6 @@ class MainApi {
       headers: this._headers,
     });
   };
-
 
   //Проверка токена(данных, полученных с профиля)
   checkToken = () => {
@@ -75,7 +70,7 @@ class MainApi {
   };
 
   // Апдейт данных профиля
-  updateUser = ({email, name}) => {
+  updateUser = ({ email, name }) => {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       credentials: "include",

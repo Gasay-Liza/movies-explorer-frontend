@@ -10,9 +10,8 @@ function SearchForm({
   handleToggleCheckbox,
   handleChangeMovieName,
   setIsShortFilms,
-  isShortFilms
+  isShortFilms,
 }) {
-
   return (
     <section
       className="search-form page__section"
@@ -35,7 +34,7 @@ function SearchForm({
         ></button>
       </form>
       <span className="search-form__error">{isSearchError}</span>
-      
+
       <div className="search-form__line">
         <FilterCheckbox
           isShortFilms={isShortFilms}

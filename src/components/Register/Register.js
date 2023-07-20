@@ -1,16 +1,26 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import Auth from "../Auth/Auth";
-import useValidation from '../../hooks/useValidation';
-import {NAME_REG_EXP} from '../../utils/constans';
-function Register({isLoading, onRegister, loggedIn, textServerError, setTextServerError}) {
-const {values, errors, handleChange, isValid, resetValidation} = useValidation();
+import useValidation from "../../hooks/useValidation";
+import { NAME_REG_EXP } from "../../utils/constans";
+function Register({
+  isLoading,
+  onRegister,
+  loggedIn,
+  textServerError,
+  setTextServerError,
+}) {
+  const { values, errors, handleChange, isValid, resetValidation } =
+    useValidation();
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(
+    (e) => {
       e.preventDefault();
       onRegister(values);
-  },[values, onRegister])
-  
+    },
+    [values, onRegister]
+  );
+
   //Резет валидации ошибок инпутов
   useEffect(() => {
     resetValidation();
@@ -20,7 +30,6 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
   useEffect(() => {
     setTextServerError("");
   }, [setTextServerError]);
-
 
   return loggedIn ? (
     <Navigate to="/" replace />
@@ -46,48 +55,54 @@ const {values, errors, handleChange, isValid, resetValidation} = useValidation()
           <label htmlFor="name" className="auth__label">
             <h3 className="auth__input-subtitle">Имя</h3>
             <input
-              className={`auth__input ${errors.name==="" ? "" : "auth__input_type_invalid"}`}
+              className={`auth__input ${
+                errors.name === "" ? "" : "auth__input_type_invalid"
+              }`}
               id="name"
               type="text"
               name="name"
               pattern={NAME_REG_EXP}
               onChange={handleChange}
-              value={values.name  || ''}
+              value={values.name || ""}
               minLength="2"
               required
             />
-            <span className="auth__error">{errors.name || ''}</span>
+            <span className="auth__error">{errors.name || ""}</span>
           </label>
 
           <label htmlFor="email" className="auth__label">
             <h3 className="auth__input-subtitle">E-mail</h3>
             <input
-              className={`auth__input ${errors.email==="" ? "" : "auth__input_type_invalid"}`}
+              className={`auth__input ${
+                errors.email === "" ? "" : "auth__input_type_invalid"
+              }`}
               id="email"
               name="email"
               type="email"
               onChange={handleChange}
-              value={values.email || ''}
+              value={values.email || ""}
               disabled={isLoading}
               required
             />
-            <span className="auth__error">{errors.email || ''}</span>
+            <span className="auth__error">{errors.email || ""}</span>
           </label>
 
           <label htmlFor="password" className="auth__label">
             <h3 className="auth__input-subtitle">Пароль</h3>
             <input
-              className={`auth__input ${errors.password ==="" ? "" : "auth__input_type_invalid"}`}
+              className={`auth__input ${
+                errors.password === "" ? "" : "auth__input_type_invalid"
+              }`}
               id="password"
               name="password"
               type="password"
               onChange={handleChange}
-              value={values.password || ''} 
+              value={values.password || ""}
               minLength="8"
               disabled={isLoading}
               required
             />
-            <span className="auth__error">{errors.password || ''}</span>
+            <span className="auth__error">{errors.password || ""}</span>
           </label>
         </fieldset>
       </Auth>

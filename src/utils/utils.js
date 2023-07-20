@@ -1,4 +1,3 @@
-
 export function checkPath(arr, path) {
   return arr.includes(path);
 }

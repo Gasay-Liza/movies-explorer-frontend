@@ -3,7 +3,7 @@ import "../Movies/Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function SavedMovies({ savedMovies,  onCardDelete }) {
+function SavedMovies({ savedMovies, onCardDelete }) {
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
   const [foundMovies, setFoundMovies] = useState(null); // Результат поиска фильмов
   const [searchName, setSearchName] = useState(""); // Название фильма в поисковике
@@ -15,9 +15,8 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
   function submitSearch(e) {
     e.preventDefault();
     const filter = filterBySearch(isShortFilms);
-    console.log("filter", filter);
     setFoundMovies(filter);
-    if (searchName === ""){
+    if (searchName === "") {
       setSearchError("Нужно ввести ключевое слово");
     } else {
       setSearchError("");
@@ -27,8 +26,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
     } else {
       setIsMoviesNotFound(true);
     }
-    console.log("foundMovies", foundMovies);
-    console.log("moviesNotFound", isMoviesNotFound);
   }
 
   // При вводе в форму
@@ -39,7 +36,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
   // Колбэк переключения чекбокса короткометражек
   const handleToggleCheckbox = useCallback(
     (isChecked) => {
-      console.log(isChecked);
       setIsShortFilms(isChecked);
       const filter = filterBySearch(isChecked);
       setFoundMovies(filter);
@@ -48,7 +44,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
       } else {
         setIsMoviesNotFound(true);
       }
-      console.log("foundMovies", foundMovies);
     },
     [isShortFilms, foundMovies]
   );
@@ -56,7 +51,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
   // Фильтрация поиска по слову и чекбоксу
   const filterBySearch = useCallback(
     (isChecked) => {
-      console.log('savedMovies', savedMovies)
       let updatedList = [...savedMovies]; // Сделаем копию списка фильмов
       updatedList = updatedList.filter((movie) => {
         return (
@@ -70,7 +64,6 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
     [savedMovies, searchName]
   );
 
-
   useEffect(() => {
     if (foundMovies) {
       setRenderMovies(foundMovies);
@@ -78,7 +71,7 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
   }, [foundMovies]);
 
   useEffect(() => {
-    if (savedMovies){
+    if (savedMovies) {
       const filter = filterBySearch(isShortFilms);
       setRenderMovies(filter);
     }
@@ -96,14 +89,14 @@ function SavedMovies({ savedMovies,  onCardDelete }) {
         setIsShortFilms={setIsShortFilms}
         isSearchError={isSearchError}
       />
-        <div className="movies__container">
-          <MoviesCardList
-            movies={renderMovies}
-            savedMovies={savedMovies}
-            isMoviesNotFound={isMoviesNotFound}
-            onCardDelete={onCardDelete}
-          />
-        </div>
+      <div className="movies__container">
+        <MoviesCardList
+          movies={renderMovies}
+          savedMovies={savedMovies}
+          isMoviesNotFound={isMoviesNotFound}
+          onCardDelete={onCardDelete}
+        />
+      </div>
     </section>
   );
 }

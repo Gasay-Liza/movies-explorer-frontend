@@ -5,7 +5,16 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import MoreFilmsButton from "../MoreFilmsButton/MoreFilmsButton";
 import Preloader from "../Preloader/Preloader";
 import beatfilmMoviesApi from "../../utils/moviesApi";
-import { DURATION_OF_SHORT_FILMS, WINDOW_SIZE_M, WINDOW_SIZE_S, NUMBER_OF_CARDS_XL, NUMBER_OF_CARDS_L, NUMBER_OF_CARDS_M, NUMBER_OF_CARDS_S, NUMBER_OF_CARDS_XS } from "../../utils/constans";
+import {
+  DURATION_OF_SHORT_FILMS,
+  WINDOW_SIZE_M,
+  WINDOW_SIZE_S,
+  NUMBER_OF_CARDS_XL,
+  NUMBER_OF_CARDS_L,
+  NUMBER_OF_CARDS_M,
+  NUMBER_OF_CARDS_S,
+  NUMBER_OF_CARDS_XS,
+} from "../../utils/constans";
 function Movies({ savedMovies, onCardSave, onCardDelete, setSavedMovies }) {
   const [allMovies, setAllMovies] = useState([]); // Данные всех фильмов с БД beatfilmMovies
   const [renderMovies, setRenderMovies] = useState([]); // Показываемые фильмы на странице
@@ -28,7 +37,7 @@ function Movies({ savedMovies, onCardSave, onCardDelete, setSavedMovies }) {
     e.preventDefault();
     const filter = filterBySearch(isShortFilms);
     setFoundMovies(filter);
-    if (searchName === ""){
+    if (searchName === "") {
       setSearchError("Нужно ввести ключевое слово");
     } else {
       setSearchError("");
@@ -66,15 +75,11 @@ function Movies({ savedMovies, onCardSave, onCardDelete, setSavedMovies }) {
       let updatedList = [...allMovies]; // Сделаем копию списка фильмов
       updatedList = updatedList.filter((movie) => {
         return (
-          
           (isChecked ? movie.duration <= DURATION_OF_SHORT_FILMS : movie) &&
           (movie.nameRU.toLowerCase().includes(searchName.toLowerCase()) || // Проверка в RU имени
             movie.nameEN.toLowerCase().includes(searchName.toLowerCase())) // Проверка в EN имени
         );
       });
-      console.log('searchName',searchName)
-      console.log(updatedList)
-      
       return updatedList;
     },
     [allMovies, searchName]
@@ -130,7 +135,6 @@ function Movies({ savedMovies, onCardSave, onCardDelete, setSavedMovies }) {
     localStorage.setItem("searchName", searchName);
     localStorage.setItem("stateCheckbox", JSON.stringify(isShortFilms));
   }, [isShortFilms, foundMovies]);
-
 
   // Отслеживаю ширину окна
   function handleResize() {
