@@ -2,19 +2,29 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    max-width: 364px;
     background: #222222;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
     border-radius: 6px;
 }
+
 .movie-card__image {
-    max-width: 100%;
+    width: 100%;
+    height: 203px;
     object-fit: cover;
+    object-position: 50% 50%;
  }
+
+.movies-card__link{
+    transition: opacity 0.2s linear;
+}
+
+.movies-card__link:hover{
+    opacity: 0.7;
+}
 
 .movie-card__description { 
     box-sizing: border-box;
-    padding: 16px 24px 16px 16px;
+    padding: 9px 16px 16px;
     max-width: 100%;
     max-height: 78px;
     display: flex;
@@ -24,8 +34,9 @@
 .movie-card__name-container { 
     width: 100%;
     display: grid;
-    grid-template-columns:  1fr 14px;
+    grid-template-columns:  1fr 30px;
     align-items: center;
+    
 }
 
 .movie-card__name { 
@@ -43,16 +54,33 @@
     text-overflow: ellipsis; /* Добавляем многоточие */
 }
 
-.photo-card__like {
-    background-image: url("../../images/like-icon.svg");
-    width: 14px;
-    height: 12px;
+.movie-card__delete-btn {
+    padding: 0 0;
+    width: 30px;
+    height: 30px;
     border: none;
     background-color: transparent;
+    background-image: url("../../images/delete-icon.svg");
+ }
+
+
+ .movie-card__like-btn {
+    padding: 0 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-image: url("../../images/like-icon.svg");
+ }
+
+ .movie-card__like-btn_active {
+    background-image: url("../../images/like-icon-active.svg");
  }
 
 .movie-card__duration {
-    margin: 17px 0 0;
+    margin: 10px 0 0;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -63,11 +91,16 @@
     color: #8B8B8B;
  }
 
- @media screen and (max-width: 860px){
+ @media screen and (max-width: 1080px){
+    .movie-card__image {
+        height: 190px;
+     }
 
     .movie-card__description { 
+        width: 100%;
+        max-width: 100%;
         box-sizing: border-box;
-        padding: 14px 22px 14px 14px;
+        padding: 8px 14px 14px;
         height: 72px;
     }
 
@@ -76,15 +109,18 @@
     }
 
     .movie-card__duration {
-        margin: 15px 0 0;
+        margin: 7px 0 0;
     }
 }
 
-@media screen and (max-width: 420px){
+@media screen and (max-width: 560px){
+    .movie-card__image {
+        height: 203px;
+     }
 
     .movie-card__description { 
         box-sizing: border-box;
-        padding: 14px 18px 14px 14px;
+        padding: 7px 10px 14px 14px;
         height: 69px;
     }
 
@@ -95,8 +131,15 @@
     }
 
     .movie-card__duration {
-        margin: 14px 0 0;
+        margin: 7px 0 0;
         font-size: 10px;
         line-height: 12px;
+     }
+}
+
+@media screen and (max-width: 420px){
+
+    .movie-card__image {
+        height: 168px;
      }
 }

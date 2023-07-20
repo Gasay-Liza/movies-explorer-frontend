@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: inherit;
  }
 
  .auth__inner{
@@ -53,12 +54,11 @@
 }
 
 .auth__fieldset_type_login{
-    margin-bottom: 220px;
+    margin-bottom: 194px;
 }
 
 .auth__label { 
     width: 100%;
-    margin-top: 24px;
 }
 
 .auth__label:first-child { 
@@ -93,20 +93,34 @@
 .auth__input:focus { 
     border-bottom: 1px solid #4285F4;;
 }
-.auth__input_type_password{
+.auth__input_type_invalid{
     color: #EE3465;
 }
 
 .auth__error{
-    margin: 6px 0;
+    display: flex;
+    flex-direction: column;
+    margin: 6px 0 6px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 10px;
     line-height: 12px;
+    min-height: 12px;
     color: #EE3465;
+    opacity: 1;
 }
 
+.auth__server-error{
+    align-items: center;
+    margin: 0 0 14px;
+    font-size: 11px;
+    line-height: 14px;
+}
+
+.auth__server-error__active{
+    opacity: 0;
+}
 
 .auth__btn {
     width: 100%; 
@@ -124,6 +138,11 @@
     color: #FFFFFF;
 }
 
+.auth__btn:disabled {
+    color: #C2C2C2;
+    background: #F8F8F8;
+}
+
 .auth__hint{
     width: 100%;
     padding: 16px 0 0;
@@ -135,7 +154,7 @@
 }
 
 .auth__hint-text{
-    margin: 0 0;
+    margin: 0 0 30px;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -161,6 +180,8 @@
      }
     
     .auth__logo {
+        display: flex;
+        margin-top: 56px;
         width: 38px;
         height: 38px;
     }
