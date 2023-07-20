@@ -28,6 +28,12 @@ Backend https://api.gasay-movies-explorer.nomoredomains.rocks
 Frontend and backend https://gasay-movies-explorer.nomoredomains.xyz/
 
 Pull request https://github.com/Gasay-Liza/movies-explorer-frontend/pull/2
+
+### Screenshot
+
+![Desktop screenshot](image-1.png)
+![Desktop screenshot](image-2.png)
+
 ## Структура и функционал
 
 Сайт состоит из нескольких страниц:
@@ -44,7 +50,19 @@ Pull request https://github.com/Gasay-Liza/movies-explorer-frontend/pull/2
 Проект реализован на React, структура проекта создана с помощью `Create React App`
 
 ## Инструменты и стек: 
-#HTML #CSS #React #Express #MongoDB #NodeJS #API  #Nginx #JWT #Postman
+- HTML
+- CSS
+- JS
+- Express
+- MongoDB
+- React
+- Express 
+- MongoDB 
+- NodeJS 
+- API
+- Nginx 
+- JWT 
+- Postman
 
 ## Ссылка на сгенерированный макет в Figma
 
@@ -73,3 +91,10 @@ Pull request https://github.com/Gasay-Liza/movies-explorer-frontend/pull/2
     `npm run build`
 
     Создает оптимизированную версию приложения, готовую для развертывания, в папке `build`
+
+## Автор
+
+**Гасай Елизавета**
+
+- e-mail: [gasayliza@gmail.com](mailto:gasayliza@gmail.com)
+- Telegram: [@gasayliza](https://t.me/gasayliza)
