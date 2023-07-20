@@ -31,8 +31,8 @@ Pull request https://github.com/Gasay-Liza/movies-explorer-frontend/pull/2
 
 ### Screenshot
 
-![Desktop screenshot](image-1.png)
-![Desktop screenshot](image-3.png)
+![Desktop screenshot](image-6.png)
+![Desktop screenshot](image-5.png)
 
 ## Структура и функционал
 
